@@ -84,6 +84,9 @@ code, .mono { font-family: var(--font-mono); font-size: 0.92em; }
 .topnav nav::-webkit-scrollbar { display: none; }
 .topnav a { font-size: var(--step--1); color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: var(--radius); white-space: nowrap; transition: color .2s, background-color .2s; }
 .topnav a:hover { color: var(--ink); background: var(--navy-soft); }
+.topnav a.dl { flex: none; color: var(--surface); background: var(--navy); font-weight: 600; padding: 6px 14px; }
+.topnav a.dl:hover { color: var(--surface); background: var(--accent); }
+.topnav > div { gap: 12px; }
 
 /* 머리 */
 .masthead { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 48px; align-items: end; padding-block: 72px 56px; border-bottom: 1px solid var(--line); }
@@ -256,7 +259,7 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
 
 <div class="wrap">
 
-<div class="topnav"><div><b>개발 리더 포트폴리오</b><nav aria-label="목차"><a href="#summary">요약</a><a href="#career">경력</a><a href="#csharp">C#</a><a href="#platform">플랫폼</a><a href="#arch">아키텍처</a><a href="#legacy">이관</a><a href="#code">코드</a><a href="#screens">화면</a><a href="#ai">AI 체계</a><a href="#cicd">CI/CD</a></nav></div></div>
+<div class="topnav"><div><b>개발 리더 포트폴리오</b><nav aria-label="목차"><a href="#summary">요약</a><a href="#career">경력</a><a href="#csharp">C#</a><a href="#platform">플랫폼</a><a href="#arch">아키텍처</a><a href="#legacy">이관</a><a href="#code">코드</a><a href="#screens">화면</a><a href="#ai">AI 체계</a><a href="#cicd">CI/CD</a></nav><a class="dl" href="https://kgodkim.github.io/wms-portfolio/portfolio.pdf" download="portfolio.pdf">PDF 내려받기</a></div></div>
 
 <header class="masthead">
   <div class="head">
