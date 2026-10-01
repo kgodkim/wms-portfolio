@@ -1,8 +1,6 @@
-# 물류 WMS 플랫폼 개발과 AI 에이전트 기반 개발 체계
+# 개발 리더 포트폴리오
 
-개발 리더 지원용 포트폴리오입니다.
+물류 WMS 플랫폼 개발과 AI 에이전트 기반 개발 체계
 
-- 웹 페이지: `index.html` (GitHub Pages 를 켜면 웹 주소로 열립니다)
-- 인쇄본: `portfolio.pdf` (A4)
-
-수치는 모두 개인 저장소 9개의 커밋·PR·이슈 기록과 소스 파일을 2026-10-01 에 직접 집계한 값입니다.
+- 웹 페이지: https://kgodkim.github.io/wms-portfolio/
+- 인쇄본(A4): [portfolio.pdf](portfolio.pdf)
