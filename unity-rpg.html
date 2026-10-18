@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>진행 중 프로젝트 · Unity RPG</title>
-<meta name="description" content="Unity 6 3D 액션 RPG 를 AI 코딩 에이전트와 권한을 나눠 개발하는 진행 중 프로젝트">
+<meta name="description" content="Unity 6 3D 액션 RPG 개발: 아키텍처, 핵심 코드, 기술 문제 해결, 검증 체계">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
@@ -256,44 +256,399 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
 <body>
 <div class="wrap">
 
-<div class="topnav"><div><b>진행 중 프로젝트</b><nav aria-label="목차"><a href="#summary">요약</a><a href="#screens">화면</a><a href="#systems">시스템</a><a href="#art">아트</a><a href="#ai">AI 운용</a><a href="#quality">검증</a><a href="#now">진행</a></nav></div></div>
+<div class="topnav"><div><b>진행 중 프로젝트</b><nav aria-label="목차"><a href="#summary">요약</a><a href="#screens">화면</a><a href="#stack">기술</a><a href="#arch">아키텍처</a><a href="#code">코드</a><a href="#problems">문제 해결</a><a href="#systems">시스템</a><a href="#quality">검증</a><a href="#art">아트</a><a href="#ai">AI 운용</a><a href="#now">진행</a></nav></div></div>
 
 <header class="masthead">
   <div class="head">
     <p class="eyebrow">진행 중 프로젝트 · 기준일 2026-10-18</p>
     <h1>Unity 6 3D 액션 RPG<br>「일곱 봉인석」</h1>
-    <p class="lead">동화풍 판타지 3D RPG 를 Unity 6 · C# 로 개발하고 있습니다. 게임 디자인 · 시나리오 · 그림체 · 수치 방향은 사람이 정하고, 구현 방식 · 리팩터링 · 검사 추가 같은 기술 결정은 AI 코딩 에이전트(Claude Code)가 정해 실행하도록 권한을 나눴습니다. 결과물은 테스트 · 플레이 검사 · 부하 측정 · 빌드 경고 0 을 통과해야 커밋됩니다.</p>
+    <p class="lead">Unity 6 · URP · C# 로 개발 중인 3D 액션 RPG 입니다. 게임 규칙을 상태 없는 규칙 클래스로, 수치를 DB 표로 분리해 규칙 하나하나를 자동 테스트로 고정했고, 컴파일 경고 0 · 테스트 · 플레이 검사 · 부하 측정 · 빌드 검사를 통과해야만 커밋되는 개발 체계를 만들었습니다. 구현은 AI 코딩 에이전트(Claude Code)가 이 체계 안에서 하고, 사람은 설계안 결정과 검수를 맡습니다.</p>
   </div>
   <dl class="profile">
-    <div><dt>엔진</dt><dd>Unity 6.6 · URP</dd></div>
-    <div><dt>언어</dt><dd>C# (약 3.7만 줄)</dd></div>
-    <div><dt>기간</dt><dd>2026-10-05 ~ 진행 중</dd></div>
-    <div><dt>역할</dt><dd>설계안 결정 · 검수 (사람) · 구현 (에이전트)</dd></div>
+    <div><dt>엔진</dt><dd>Unity 6.6 · URP 17.6</dd></div>
+    <div><dt>언어</dt><dd>C# 37,187줄 (테스트 10,328줄)</dd></div>
+    <div><dt>기간</dt><dd>2026-10-05 ~ 진행 중 (작업일 12일)</dd></div>
+    <div><dt>역할</dt><dd>설계안 결정 · 개발 체계 설계 · 검수, 구현은 에이전트</dd></div>
   </dl>
 </header>
 
 <section id="summary">
   <header><h2>요약</h2><p>2026-10-18 저장소 측정</p></header>
   <div class="body">
-    <p class="intro">2주 동안 작업일 12일에 커밋 218건 · GitHub 이슈 208건을 처리했습니다. 전투 · 성장 · 아이템 · 강화 · 마법 · 변신 · 상점 · NPC 대화 · 날씨 · 낮밤 · 저장을 구현했고, 수치는 모두 DB 표로 관리합니다. 규칙과 수치는 EditMode 테스트 593건으로 고정했습니다.</p>
+    <p class="intro">2주 동안 커밋 218건 · GitHub 이슈 208건을 처리했습니다. 전투 · 성장 · 아이템 · 강화 · 마법 · 변신 · 상점 · NPC 대화 · 날씨 · 낮밤 · 저장 · 장별 콘텐츠 내려받기를 구현했고, 게임 규칙 93개 클래스와 수치 표 23개를 EditMode 테스트 593건으로 검사합니다.</p>
     <div class="stats">
       <div class="stat"><span class="k">커밋</span><span class="v">218</span><span class="s">작업일 12일 · 모두 AI 공동작성</span></div>
       <div class="stat"><span class="k">GitHub 이슈</span><span class="v">208 / 181</span><span class="s">전체 / 닫힘 · 개선 157 · 버그 34 · 결정 요청 34</span></div>
-      <div class="stat"><span class="k">자동 테스트</span><span class="v">593</span><span class="s">NUnit EditMode (Test · TestCase)</span></div>
+      <div class="stat"><span class="k">자동 테스트</span><span class="v">593</span><span class="s">NUnit EditMode · 테스트 파일 145개</span></div>
       <div class="stat"><span class="k">C# 코드</span><span class="v">37,187줄</span><span class="s">게임 18,550 · 에디터 도구 8,309 · 테스트 10,328</span></div>
+      <div class="stat"><span class="k">규칙 클래스</span><span class="v">93</span><span class="s">상태 없는 static <code>*Rules</code></span></div>
       <div class="stat"><span class="k">데이터 표</span><span class="v">23</span><span class="s">JSON 정본 ↔ MariaDB</span></div>
-      <div class="stat"><span class="k">문서</span><span class="v">65</span><span class="s">마크다운 15,476줄 (계획 · 규칙 · 시나리오)</span></div>
     </div>
   </div>
 </section>
 
 <section id="screens">
-  <header><h2>화면</h2><p>플레이 검사 스크립트가 찍은 실제 플레이 화면</p></header>
+  <header><h2>게임 화면</h2><p>보스전 · 사냥 · 마을 · 창. 연출 영상 1컷 외에는 플레이 모드 게임 카메라 캡처</p></header>
   <div class="body">
-    <div class="shots">
-      <figure class="shot wide"><img src="game/village.jpg" alt="마을 광장에서 용사가 서 있는 쿼터뷰 플레이 화면, 상단 초상·자원·작은 지도, 하단 HP·MP 바와 채팅 창" loading="lazy" width="1400" height="614"><figcaption>0장 마을 광장. 쿼터뷰 카메라, 상단 HUD(초상 · 전투력 · 자원 · 작은 지도 · 퀘스트), 하단 HUD(상태 · HP | MP · 채팅 · 단축키 16칸)</figcaption></figure>
-      <figure class="shot"><img src="game/status.jpg" alt="상태 창: 능력치, 스탯 분배, 캐릭터 3D 미리보기와 장비 칸 10개" loading="lazy" width="1400" height="614"><figcaption>상태 창(C). 3D 미리보기 둘레 장비 칸 10개, 스탯 분배, +8 무기</figcaption></figure>
-      <figure class="shot"><img src="game/inventory.jpg" alt="소지품 창: 장비 칸 판과 분류 탭, 마법서·물약 아이콘 격자" loading="lazy" width="1400" height="614"><figcaption>소지품 창. 분류 탭 4개, 마법서 21종 아이콘(단계별 표지 색)</figcaption></figure>
+    <div class="sub">
+      <h3>보스전 <small>0장 보스 「마물 드래곤」 · 보스 스테이지</small></h3>
+      <div class="shots">
+        <figure class="shot wide"><img src="game/boss_fight.jpg" alt="보스 스테이지: 마물 드래곤 앞에서 용사와 동료 로완이 싸우고, 보스가 소환한 방울 몬스터들이 둘러싼 장면" loading="lazy" width="1400" height="614"><figcaption>보스전. 동료 NPC 로완(AI 동료)이 함께 싸우고, 보스는 플레이어가 14m 안에 있으면 10초마다 졸개를 소환(최대 4마리). HP 50% 에서 2페이즈(공격 간격 ×0.75 · 이동 ×1.25, 돌진 2회 연속 · 꼬리 휘두르기 · 마기 장판 3곳)</figcaption></figure>
+        <figure class="shot"><img src="game/boss_arena.jpg" alt="보스 스테이지 전경: 보랏빛 마기가 깔린 폐허 언덕과 마물 드래곤" loading="lazy" width="1400" height="614"><figcaption>보스 경기장. 반지름 22m, 돌진은 벽 4m 앞에서 멈춤. 보스 모델은 뼈 34개 · 동작 10개를 Blender 스크립트로 리깅</figcaption></figure>
+        <figure class="shot"><img src="game/boss_intro.jpg" alt="보스 등장 연출 영상의 한 장면: 거대한 드래곤 앞에 선 용사" loading="lazy" width="1400" height="788"><figcaption>보스 등장 연출 영상(생성 컷 + 자막 · 작곡 음악을 스크립트로 합성). 입장 확인 → 등장 영상(처음 한 번) → 보스 스테이지 순서</figcaption></figure>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>사냥 <small>0장 들판 · 출현 구역 11개 · 동시 54마리</small></h3>
+      <div class="shots">
+        <figure class="shot"><img src="game/hunt_close.jpg" alt="들판에서 용사가 공룡형 몬스터와 근접 전투하는 장면" loading="lazy" width="1400" height="614"><figcaption>근접 전투. 몬스터 이름표에 레벨 · HP, 공격 대상은 상단 몬스터 정보 창에 표시</figcaption></figure>
+        <figure class="shot"><img src="game/hunt_field.jpg" alt="들판에서 여러 몬스터에 둘러싸인 용사, MISS 글자가 뜬 장면" loading="lazy" width="1400" height="614"><figcaption>들판 사냥. 선공 · 후공 몬스터가 섞여 나오고, 명중 판정에 따라 MISS · 치명타 숫자 표시</figcaption></figure>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>마을 · 창</h3>
+      <div class="shots">
+        <figure class="shot wide"><img src="game/village.jpg" alt="마을 광장에서 용사가 서 있는 쿼터뷰 플레이 화면, 상단 초상·자원·작은 지도, 하단 HP·MP 바와 채팅 창" loading="lazy" width="1400" height="614"><figcaption>0장 마을 광장. 쿼터뷰 카메라, 상단 HUD(초상 · 전투력 · 자원 · 작은 지도 · 퀘스트), 하단 HUD(상태 · HP | MP · 채팅 · 단축키 16칸), 걸어 다니는 마을 사람 12명</figcaption></figure>
+        <figure class="shot"><img src="game/status.jpg" alt="상태 창: 능력치, 스탯 분배, 캐릭터 3D 미리보기와 장비 칸 10개" loading="lazy" width="1400" height="614"><figcaption>상태 창. 3D 미리보기 둘레 장비 칸 10개, 스탯 분배, +8 무기</figcaption></figure>
+        <figure class="shot"><img src="game/inventory.jpg" alt="소지품 창: 장비 칸 판과 분류 탭, 마법서·물약 아이콘 격자" loading="lazy" width="1400" height="614"><figcaption>소지품 창. 분류 탭 4개, 마법서 21종 아이콘</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="focus" id="stack">
+  <header><h2>기술 스택</h2><p>패키지는 저장소 manifest 기준</p></header>
+  <div class="body">
+    <div class="skills">
+      <div class="skill"><b>엔진 · 렌더링</b><span>Unity 6.6, URP 17.6(PC · Mobile 렌더러), MToon10 셀 셰이딩(UniVRM 0.131) + 윤곽선 Renderer Feature, 풀 · 바람 · 비 셰이더, Mesh LOD</span></div>
+      <div class="skill"><b>언어 · 런타임</b><span>C#, async Task 백그라운드 DB 읽기 · 쓰기, Newtonsoft.Json, 어셈블리 3개(게임 · 에디터 · 테스트)</span></div>
+      <div class="skill"><b>패키지</b><span>Input System 1.20, AI Navigation 2.0(NavMesh 영역 분리), Addressables 2.11(원격 장 묶음), Timeline, uGUI</span></div>
+      <div class="skill"><b>데이터</b><span>MariaDB(MySqlConnector 2.3.7), JSON 정본 ↔ DB 행 변환기, 표 · 열 COMMENT 자동 생성</span></div>
+      <div class="skill"><b>테스트</b><span>Unity Test Framework 1.8(NUnit) EditMode 593건, 장면을 열어 컴포넌트 구성을 검사하는 픽스처, 리플렉션 규약 검사</span></div>
+      <div class="skill"><b>자동화</b><span>Unity CLI(<code>unity command eval</code>)로 에디터 제어, zsh 검사 스크립트 30개, git pre-commit 훅, 에디터 장기 작업 큐(EditorJob)</span></div>
+      <div class="skill"><b>에셋 도구</b><span>Blender 5.2 Python 스크립트 12개(감면 · 리깅 · 변환), 3D · 이미지 생성 MCP, Unity MCP</span></div>
+      <div class="skill"><b>소리 · 영상</b><span>Python MIDI 작곡 → Swift 로 macOS 내장 GM 음원 렌더, C# 코드 합성 효과음 17종, 인트로 · 엔딩 영상 제작 스크립트</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="focus" id="arch">
+  <header><h2>아키텍처</h2><p>데이터 → 메모리 → 규칙 → 장면</p></header>
+  <div class="body">
+    <div class="figure" role="img" aria-label="구성도: JSON 데이터 표가 정본이고 MariaDB 와 내보내기·가져오기로 맞춘다. 실행 시작 때 DataTables 가 DB 표를 백그라운드로 읽어 불변 사전으로 적용하고, 실패하면 JSON 을 쓴다. 싱글턴 데이터베이스들이 표를 읽고, 정적 규칙 클래스가 계산한다. 장면의 플레이어·몬스터·UI·월드·이펙트 컴포넌트가 데이터베이스를 읽고 규칙을 호출한다. 저장은 PlayerStore 가 DB 에 백그라운드로 쓰고 실패하면 파일을 쓴다. 1~10장은 Addressables 원격 묶음으로 내려받는다. EditMode 테스트가 규칙·표·장면 구성을 검사한다.">
+      <svg viewBox="0 0 960 460" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrowhead"/></marker>
+          <marker id="ahh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrowhead-hot"/></marker>
+        </defs>
+        <text x="20" y="26" class="t-mute" font-size="12">데이터</text>
+        <rect x="20" y="36" width="200" height="64" rx="4" class="box"/>
+        <text x="32" y="60" font-size="13" font-weight="700">데이터 표 JSON 23개</text>
+        <text x="32" y="80" font-size="11" class="t-mute">Resources/Data · 정본 · git</text>
+        <line x1="120" y1="104" x2="120" y2="146" class="wire" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <text x="128" y="130" font-size="11" class="t-mute">내보내기 · 가져오기</text>
+        <rect x="20" y="150" width="200" height="64" rx="4" class="box"/>
+        <text x="32" y="174" font-size="13" font-weight="700">MariaDB</text>
+        <text x="32" y="194" font-size="11" class="t-mute">수치 표 · 저장 행 · 열 COMMENT</text>
+        <rect x="20" y="236" width="200" height="64" rx="4" class="box"/>
+        <text x="32" y="260" font-size="13" font-weight="700">DB 접속 정보</text>
+        <text x="32" y="280" font-size="11" class="t-mute">UserSettings (git 제외)</text>
+
+        <text x="270" y="26" class="t-mute" font-size="12">실행 시작 · 메모리</text>
+        <path d="M220,68 L268,68" class="wire" marker-end="url(#ah)"/>
+        <path d="M220,182 L245,182 L245,104 L268,104" class="wire-hot" marker-end="url(#ahh)"/>
+        <rect x="270" y="36" width="320" height="92" rx="4" class="box-app"/>
+        <text x="284" y="58" font-size="13" font-weight="700" class="t-mono">DataTables : BasicBiz&lt;T&gt;</text>
+        <text x="284" y="78" font-size="11">① 실행 시작 때 백그라운드로 표 전부 읽기</text>
+        <text x="284" y="96" font-size="11">② 로딩 화면에서 Apply, 불변 사전 참조 교체</text>
+        <text x="284" y="114" font-size="11">③ 실패하면 JSON 으로 fallback</text>
+        <line x1="430" y1="128" x2="430" y2="148" class="wire" marker-end="url(#ah)"/>
+        <rect x="270" y="150" width="320" height="64" rx="4" class="box"/>
+        <text x="284" y="174" font-size="13" font-weight="700">GameData · ItemDatabase · …</text>
+        <text x="284" y="194" font-size="11" class="t-mute">싱글턴 21개 · Version 이 바뀌면 다시 읽음</text>
+        <line x1="430" y1="214" x2="430" y2="234" class="wire" marker-end="url(#ah)"/>
+        <rect x="270" y="236" width="320" height="64" rx="4" class="box-hot"/>
+        <text x="284" y="260" font-size="13" font-weight="700" class="t-mono">*Rules 정적 순수 함수 93개</text>
+        <text x="284" y="280" font-size="11" class="t-mute">피해 · 명중 · 강화 · 드롭 · 레벨 · 출현 · 프레임</text>
+
+        <text x="640" y="26" class="t-mute" font-size="12">장면 컴포넌트 (MonoBehaviour)</text>
+        <rect x="640" y="36" width="300" height="46" rx="4" class="box"/>
+        <text x="652" y="55" font-size="13" font-weight="700">플레이어</text>
+        <text x="652" y="72" font-size="11" class="t-mute">PlayerController · Health · PlayerProgress</text>
+        <rect x="640" y="92" width="300" height="46" rx="4" class="box"/>
+        <text x="652" y="111" font-size="13" font-weight="700">몬스터</text>
+        <text x="652" y="128" font-size="11" class="t-mute">MonsterAI · MeleeAttack · SpawnZone</text>
+        <rect x="640" y="148" width="300" height="46" rx="4" class="box"/>
+        <text x="652" y="167" font-size="13" font-weight="700">UI 창</text>
+        <text x="652" y="184" font-size="11" class="t-mute">UIWindow 기반 클래스 + UIWindows 스택</text>
+        <rect x="640" y="204" width="300" height="46" rx="4" class="box"/>
+        <text x="652" y="223" font-size="13" font-weight="700">월드</text>
+        <text x="652" y="240" font-size="11" class="t-mute">DayNight · WeatherSystem · Minimap · NavMesh</text>
+        <rect x="640" y="260" width="300" height="46" rx="4" class="box"/>
+        <text x="652" y="279" font-size="13" font-weight="700">이펙트 · 소리</text>
+        <text x="652" y="296" font-size="11" class="t-mute">CombatFx · SkillFx · SfxSynth</text>
+        <path d="M590,176 L638,176" class="wire" marker-end="url(#ah)"/>
+        <text x="598" y="170" font-size="11" class="t-mute">읽기</text>
+        <path d="M590,276 L638,276" class="wire-hot" marker-end="url(#ahh)"/>
+        <text x="598" y="270" font-size="11" class="t-mute">호출</text>
+
+        <text x="20" y="352" class="t-mute" font-size="12">저장 · 배포 · 검증</text>
+        <path d="M700,306 L700,336 L160,336 L160,368" class="wire" marker-end="url(#ah)"/>
+        <path d="M480,336 L480,368" class="wire" marker-end="url(#ah)"/>
+        <rect x="20" y="370" width="280" height="72" rx="4" class="box"/>
+        <text x="32" y="392" font-size="13" font-weight="700">저장 PlayerStore · DbSaveStore</text>
+        <text x="32" y="411" font-size="11" class="t-mute">백그라운드 순서 UPSERT, 종료 때 Flush</text>
+        <text x="32" y="428" font-size="11" class="t-mute">DB 실패 → 파일 캐시</text>
+        <rect x="330" y="370" width="300" height="72" rx="4" class="box"/>
+        <text x="342" y="392" font-size="13" font-weight="700">Addressables 장 묶음</text>
+        <text x="342" y="411" font-size="11" class="t-mute">설치본은 0장까지, 1~10장은 원격 묶음</text>
+        <text x="342" y="428" font-size="11" class="t-mute">https 만 · CRC 검사 · 미리 읽기</text>
+        <rect x="660" y="370" width="280" height="72" rx="4" class="box-hot"/>
+        <text x="672" y="392" font-size="13" font-weight="700">EditMode 테스트 593건</text>
+        <text x="672" y="411" font-size="11" class="t-mute">규칙 · 표 · 장면 구성 · 코드 규약</text>
+        <text x="672" y="428" font-size="11" class="t-mute">+ 플레이 · 부하 · 빌드 검사</text>
+      </svg>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>폴더</th><th>파일 · 줄</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="key">Items</td><td>44 · 3,052</td><td>장비 칸 10개, 등급, 강화 규칙 · 연출 · 무기 오라, 드롭 표, 상점, 소지품 탭, 장비 외형 교체</td></tr>
+          <tr><td class="key">World</td><td>18 · 1,596</td><td>낮밤 · 해 방향, 무작위 날씨, 풀 밭 생성, 숲 분위기, 작은 지도(회전 · 클릭 이동), 안전 지대</td></tr>
+          <tr><td class="key">Fx</td><td>11 · 1,292</td><td>타격 · 사망 · 강화 · 스킬 이펙트, 파티클 시스템 재사용(EmitParams), 피해 숫자</td></tr>
+          <tr><td class="key">Monsters</td><td>25 · 1,284</td><td>AI(선공 · 후공 · 배회 · 추격), 레벨 정책, 출현 규칙, 보스 2페이즈 · 졸개 소환</td></tr>
+          <tr><td class="key">Data</td><td>9 · 1,024</td><td>DataTables, JSON ↔ DB 행 변환(TableCodec), DB 표 읽기 · 쓰기, 플레이어 저장소</td></tr>
+          <tr><td class="key">Progress</td><td>11 · 779</td><td>레벨 표 99행, 경험치 곡선 계산, 스탯 분배, 퀘스트 경험치</td></tr>
+          <tr><td class="key">Title</td><td>8 · 733</td><td>타이틀 · 캐릭터 선택, 로딩 화면(데이터 → 장 내려받기 → 장면), Addressables 장 묶음</td></tr>
+          <tr><td class="key">그 외</td><td>81 · 4,734</td><td>캐릭터 · 마법 · 변신 · 단축키 · 대화 · 소리 · 설정 · 저장 · 스테이지 · Core(싱글턴 · 공통 도우미)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h4>설계 원칙</h4>
+        <ul>
+          <li><b>규칙 · 상태 · 컴포넌트 분리</b>: 계산은 상태 없는 <code>*Rules</code> static 함수, 상태는 <code>BasicBiz&lt;T&gt;</code> 싱글턴, 화면 · 입력은 MonoBehaviour. 규칙은 장면 없이 테스트한다</li>
+          <li><b>수치는 코드 밖에</b>: 마을 범위 · 출현 간격 · 강화 확률 · 드롭 확률 · 경험치 배율까지 표에서 읽는다. 코드 상수 확률 배열은 두지 않는다</li>
+          <li><b>공통 경로 하나</b>: 표 읽기 · 파티클 생성 · 장면 전환 · 플레이어 판정은 정해진 한 곳만 쓰고, 테스트가 우회 호출을 찾는다</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>동시성 · 다중접속 대비</h4>
+        <ul>
+          <li>DB 읽기는 <code>Task.Run</code> 백그라운드, 적용은 메인 스레드에서 한 번. 여러 스레드가 읽는 표는 만든 뒤 바꾸지 않는 사전이고 참조만 바꾼다</li>
+          <li>싱글턴 생성은 이중 검사 잠금, 가변 상태는 <code>Sync</code> 잠금. 도메인 리로드를 끈 에디터에서도 플레이 시작 · 종료 때 모든 인스턴스를 버린다</li>
+          <li>저장 쓰기는 순서를 지키는 백그라운드 큐, 종료 · 타이틀로 나갈 때 Flush</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="focus" id="code">
+  <header><h2>핵심 코드</h2><p>저장소에서 발췌, <code>…</code> 는 생략 표시</p></header>
+  <div class="body">
+    <div class="code-card">
+      <h3>① 싱글턴 기반 클래스 <code>BasicBiz&lt;T&gt;</code></h3>
+      <p class="why"><b>문제</b>: 관리 클래스를 <code>static class</code> 로 두니 상태가 흩어지고, 도메인 리로드를 끈 에디터에서 이전 플레이 값이 다음 플레이에 남았습니다. <b>해결</b>: public 은 <code>Instance</code> 하나, 생성자는 비공개, 플레이 시작 · 종료 때 등록된 인스턴스를 모두 버립니다. Data 계층에 public static 멤버 · 공개 생성자가 없는지 테스트가 검사합니다.</p>
+      <figure class="code"><figcaption><span>Core/BasicBiz.cs</span><span>C#</span></figcaption><pre><span class="k">public abstract class</span> BasicBiz&lt;T&gt; <span class="k">where</span> T : BasicBiz&lt;T&gt;
+{
+    <span class="k">static</span> T _instance;
+    <span class="k">static readonly object</span> Gate = <span class="k">new</span>();
+    <span class="k">protected static readonly object</span> Sync = <span class="k">new</span>();
+
+    <span class="k">public static</span> T Instance
+    {
+        <span class="k">get</span>
+        {
+            <span class="k">var</span> i = _instance;
+            <span class="k">if</span> (i != <span class="k">null</span>) <span class="k">return</span> i;
+            <span class="k">lock</span> (Gate)
+            {
+                <span class="k">if</span> (_instance == <span class="k">null</span>)
+                {
+                    _instance = (T)Activator.CreateInstance(<span class="k">typeof</span>(T), nonPublic: <span class="k">true</span>);
+                    BizRegistry.Register(Reset);
+                }
+                <span class="k">return</span> _instance;
+            }
+        }
+    }
+    …
+}
+
+<span class="k">public static class</span> BizRegistry
+{
+    …
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] <span class="k">static void</span> ResetOnPlay() =&gt; ResetAll();
+}</pre></figure>
+    </div>
+
+    <div class="code-card">
+      <h3>② 데이터 표: 백그라운드 DB 읽기와 한 번의 적용</h3>
+      <p class="why"><b>요구</b>: 수치를 DB 표로 관리하되 플레이 중 DB 왕복은 없어야 합니다. <b>구현</b>: 실행 시작 때 표 23개를 한 접속 · 한 명령으로 읽기 시작하고, 로딩 화면이 진행률(n/23)을 보여 주며 기다린 뒤 메인 스레드에서 적용합니다. 실패하거나 접속 정보가 없으면 JSON 을 씁니다. 적용하면 <code>Version</code> 이 올라 각 표 캐시가 다시 읽습니다.</p>
+      <figure class="code"><figcaption><span>Data/DataTables.cs</span><span>C#</span></figcaption><pre><span class="k">public sealed class</span> DataTables : BasicBiz&lt;DataTables&gt;
+{
+    Dictionary&lt;<span class="k">string</span>, <span class="k">string</span>&gt; _db;   <span class="c">// 적용된 DB 표 (만든 뒤 바꾸지 않는다)</span>
+    Task&lt;(Dictionary&lt;<span class="k">string</span>, <span class="k">string</span>&gt; tables, List&lt;<span class="k">string</span>&gt; missing)&gt; _loading;
+    …
+    <span class="k">public void</span> StartLoading(DbSettings s)
+    {
+        <span class="k">lock</span> (Sync)
+        {
+            …
+            <span class="k">var</span> templates = <span class="k">new</span> Dictionary&lt;<span class="k">string</span>, <span class="k">string</span>&gt;();
+            <span class="k">foreach</span> (<span class="k">var</span> n <span class="k">in</span> Names) templates[n] = ResourceJson(n);   <span class="c">// 표 틀은 메인 스레드에서</span>
+            _loading = Task.Run(() =&gt;
+            {
+                <span class="k">var</span> got = DbTableStore.Instance.ReadAll(s, names, n =&gt; templates.TryGetValue(n, <span class="k">out var</span> j) ? j : <span class="k">null</span>,
+                                                        <span class="k">out var</span> missing, () =&gt; Interlocked.Increment(<span class="k">ref</span> _read));
+                <span class="k">return</span> (got, missing);
+            });
+        }
+    }
+
+    <span class="k">public bool</span> Apply()   <span class="c">// 메인 스레드</span>
+    {
+        <span class="k">lock</span> (Sync)
+        {
+            <span class="k">var</span> task = _loading;
+            <span class="k">if</span> (task == <span class="k">null</span> || !task.IsCompleted) <span class="k">return false</span>;
+            _loading = <span class="k">null</span>;
+            <span class="k">if</span> (task.IsFaulted || task.IsCanceled) { _db = <span class="k">null</span>; Status = <span class="s">"JSON (DB 접속 실패)"</span>; <span class="k">return true</span>; }
+            <span class="k">var</span> (tables, missing) = task.Result;
+            _db = tables; Version++;   <span class="c">// 참조 교체 → 읽는 쪽은 잠금 없이 읽는다</span>
+            <span class="k">return true</span>;
+        }
+    }
+}</pre></figure>
+    </div>
+
+    <div class="code-card">
+      <h3>③ 강화 규칙: 난수를 인자로 받는 순수 함수</h3>
+      <p class="why"><b>설계</b>: 규칙 함수는 난수를 직접 만들지 않고 <code>roll</code> · <code>extra</code> 로 받아, 성공 · 실패 · 축복 · 저주 경로를 테스트가 정확한 값으로 재현합니다. 성공 확률은 코드 배열이 아니라 <code>enchant</code> 표(DB 행)에서 읽습니다.</p>
+      <figure class="code"><figcaption><span>Items/EnchantRules.cs</span><span>C#</span></figcaption><pre><span class="k">public static class</span> EnchantRules
+{
+    <span class="k">public const int</span> MinEnchant = -7, SafeEnchant = 6;
+    <span class="k">public static int</span> MaxEnchant(ItemType type) =&gt; type == ItemType.Weapon ? 15 : 10;
+    …
+    <span class="c">// roll: 0 이상 1 미만의 난수, extra: 축복 주문서의 추가 상승폭을 고를 난수</span>
+    <span class="k">public static</span> EnchantResult Apply(Kinds.EnchantScroll scroll, ItemInstance target, <span class="k">double</span> roll, <span class="k">double</span> extra, EnchantTable table = <span class="k">null</span>)
+    {
+        <span class="k">var</span> r = <span class="k">new</span> EnchantResult { before = target.enchant, after = target.enchant, chance = SuccessChance(scroll, target, table) };
+        <span class="k">if</span> (!CanUse(scroll, target)) { r.outcome = EnchantOutcome.NotAllowed; <span class="k">return</span> r; }
+        …
+        <span class="k">if</span> (roll &gt;= r.chance)
+        {
+            target.enchant = Math.Max(MinEnchant, target.enchant - 1);
+            r.after = target.enchant; r.outcome = EnchantOutcome.Failed;
+            <span class="k">return</span> r;
+        }
+        <span class="k">int</span> gain = 1;
+        <span class="k">if</span> (scroll.scrollKind == ScrollKind.Blessed &amp;&amp; target.enchant &lt; eq.safeEnchant)
+        {
+            gain = 1 + (<span class="k">int</span>)Math.Floor(extra * 3);                     <span class="c">// 1~3</span>
+            gain = Math.Min(gain, eq.safeEnchant - target.enchant);    <span class="c">// 안전 강화를 넘지 않는다</span>
+            gain = Math.Max(gain, 1);
+        }
+        target.enchant = Math.Min(eq.maxEnchant, target.enchant + gain);
+        r.after = target.enchant; r.outcome = EnchantOutcome.Success;
+        <span class="k">return</span> r;
+    }
+}</pre></figure>
+    </div>
+
+    <div class="code-card">
+      <h3>④ 프레임 조절: 30 fps 를 지키는 화질 단계</h3>
+      <p class="why"><b>요구</b>: 모든 장면 30 ~ 최대 40 fps, 발열 감소. <b>구현</b>: 단계는 URP 에셋 값의 상한이고, 평균이 2초 동안 기준 아래면 한 단계 내리고 8초 동안 여유가 있으면 올립니다. 올린 직후 다시 떨어지면 120초 동안 올리지 않아 두 단계 사이를 오가지 않습니다. 단계 전환은 순수 함수라 테스트로 고정했습니다.</p>
+      <figure class="code"><figcaption><span>FrameRateGovernor.cs</span><span>C#</span></figcaption><pre><span class="k">public static class</span> FrameRules
+{
+    <span class="k">public const int</span> MaxFps = 40, MinFps = 30, RecoverFps = 50, BackgroundFps = 15;
+    <span class="k">public const float</span> DownSeconds = 2f, UpSeconds = 8f;
+    <span class="k">public const float</span> MinRenderScale = 0.85f, MinShadowDistance = 35f;
+
+    <span class="c">// 단계별 상한 (실제 값 = min(에셋 값, 상한))</span>
+    <span class="k">public static readonly</span> Tier[] Tiers =
+    {
+        <span class="k">new</span>(1f, 1000f, 4, 8),     <span class="c">// 0 에셋 값 그대로</span>
+        <span class="k">new</span>(1f, 1000f, 4, 2),     <span class="c">// 1 MSAA 2</span>
+        <span class="k">new</span>(1f, 40f, 2, 1),       <span class="c">// 2 MSAA 끔, 그림자 2단계·40m</span>
+        <span class="k">new</span>(MinRenderScale, MinShadowDistance, 2, 1),   <span class="c">// 3 최저</span>
+    };
+
+    <span class="k">public static int</span> Next(<span class="k">int</span> tier, <span class="k">float</span> below, <span class="k">float</span> above, <span class="k">bool</span> upBlocked = <span class="k">false</span>)
+    {
+        <span class="k">if</span> (below &gt;= DownSeconds &amp;&amp; tier &lt; Tiers.Length - 1) <span class="k">return</span> tier + 1;
+        <span class="k">if</span> (above &gt;= UpSeconds &amp;&amp; tier &gt; 0 &amp;&amp; !upBlocked) <span class="k">return</span> tier - 1;
+        <span class="k">return</span> tier;
+    }
+
+    <span class="c">// 에디터는 바꾸지 않는다: 에디터 프레임은 Scene 창·인스펙터 그리기가 섞여 게임 프레임이 아니다</span>
+    <span class="k">public static bool</span> Adjusts(<span class="k">bool</span> isEditor) =&gt; !isEditor;
+}</pre></figure>
+    </div>
+
+    <div class="code-card">
+      <h3>⑤ 규칙을 검사로: 코드 규약 테스트와 pre-commit 훅</h3>
+      <p class="why">정한 규칙은 문서로 끝내지 않고 실패하는 검사로 만듭니다. 왼쪽은 공통 경로를 우회하는 호출을 찾는 테스트, 오른쪽은 마지막 테스트 · 플레이 검사가 통과이고 커밋할 파일보다 나중이어야 커밋을 허용하는 훅입니다.</p>
+      <div class="code-pair">
+        <figure class="code"><figcaption><span>Tests/EditMode/ScriptFileTests.cs</span><span>C#</span></figcaption><pre>[Test]
+<span class="k">public void</span> 공통_경로를_우회하는_호출이_없다()
+{
+    <span class="k">var</span> rules = <span class="k">new</span> (<span class="k">string</span> forbidden, <span class="k">string</span> only, <span class="k">string</span> why)[]
+    {
+        (<span class="s">"Resources.Load&lt;TextAsset&gt;"</span>, <span class="s">"DataTables.cs"</span>, <span class="s">"표는 DataTables.Json 으로 읽는다"</span>),
+        (<span class="s">"AddComponent&lt;ParticleSystem&gt;()"</span>, <span class="s">"FxSystems.cs"</span>, <span class="s">"파티클 시스템은 FxSystems.Make 로 만든다"</span>),
+        (<span class="s">"SceneManager.LoadScene("</span>, <span class="s">"SceneLoader.cs"</span>, <span class="s">"장면 전환은 SceneLoader.Load (로딩 화면)"</span>),
+        …
+    };
+    <span class="k">var</span> bad = <span class="k">new</span> List&lt;<span class="k">string</span>&gt;();
+    <span class="k">foreach</span> (<span class="k">var</span> f <span class="k">in</span> GameScripts)
+    {
+        <span class="k">var</span> src = File.ReadAllText(f);
+        <span class="k">foreach</span> (<span class="k">var</span> r <span class="k">in</span> rules)
+            <span class="k">if</span> (!f.EndsWith(r.only) &amp;&amp; src.Contains(r.forbidden)) bad.Add(<span class="s">$"{f}: {r.forbidden} → {r.why}"</span>);
+    }
+    CollectionAssert.IsEmpty(bad);
+}</pre></figure>
+        <figure class="code"><figcaption><span>Tools/githooks/pre-commit</span><span>zsh</span></figcaption><pre>TESTS=Temp/run_tests_result.json; PLAY=Temp/play_check_result.txt
+fail() { echo <span class="s">"커밋 중단: $1"</span>; exit 1; }
+[[ -f $TESTS ]] || fail <span class="s">"테스트 결과 없음"</span>
+[[ -f $PLAY ]]  || fail <span class="s">"플레이 검사 결과 없음"</span>
+(( $(grep -c <span class="s">'"Status": "Failed"'</span> $TESTS) == 0 )) \
+  || fail <span class="s">"마지막 테스트 결과에 실패가 있다"</span>
+[[ <span class="s">"$(head -1 $PLAY)"</span> == PASS* ]] \
+  || fail <span class="s">"마지막 플레이 검사가 통과하지 않았다"</span>
+git diff --cached --name-only --diff-filter=ACMR | while read -r f; do
+  …
+  [[ $TESTS -nt <span class="s">"$f"</span> ]] || fail <span class="s">"$f 이(가) 마지막 테스트보다 나중에 바뀌었다"</span>
+  [[ $PLAY -nt <span class="s">"$f"</span> ]]  || fail <span class="s">"$f 이(가) 마지막 플레이 검사보다 나중에 바뀌었다"</span>
+done || exit 1</pre></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="focus" id="problems">
+  <header><h2>기술 문제 해결</h2><p>증상 → 원인 → 조치, 같은 문제를 막는 검사까지</p></header>
+  <div class="body">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>증상</th><th>원인</th><th>조치 · 결과</th></tr></thead>
+        <tbody>
+          <tr><td class="key">플레이 중에만 고정 물체가 분홍색</td><td>GPU Resident Drawer 를 켜면 DOTS 인스턴싱 변형을 쓰는데 MToon10 셰이더에 그 변형이 없음. 에디터 렌더에서는 보이지 않음</td><td>모든 URP 에셋에서 끔. 플레이 검사가 해당 경고를 오류로 세고, 화면이 바뀌는 작업은 플레이 카메라 캡처를 직접 확인하도록 규칙화</td></tr>
+          <tr><td class="key">몬스터 처치마다 메모리 증가</td><td>처치 연출이 재질을 복제하고 해제하지 않음</td><td>부하 테스트(생성 · 처치 60마리 × 5회 + 60초 사냥)로 발견해 수정. 객체 · 실행 중 재질 · 파티클 · 관리 힙이 원래 값으로 돌아오는지 매번 판정</td></tr>
+          <tr><td class="key">몰림 구간 프레임 저하</td><td>타격마다 파티클 시스템을 새로 만들고 지움</td><td>종류별 시스템 8개를 미리 두고 <code>EmitParams</code> 로 발사, 버프 입자는 풀. 플레이어 루프 9~13ms → 6.8ms, 파티클 시스템 92 → 18</td></tr>
+          <tr><td class="key">에디터에서 화면이 흐려지고 그림자가 사라짐</td><td>프레임 조절기가 Scene 창 그리기가 섞인 에디터 프레임을 게임 프레임으로 보고 최저 단계까지 내림</td><td>에디터에서는 단계를 바꾸지 않음(<code>Adjusts(isEditor)</code>), 최저 단계도 렌더 배율 0.85 · 그림자 35m 아래로 내리지 않음</td></tr>
+          <tr><td class="key">윤곽선에 회색 틈 · 머리 모양 뭉개짐</td><td>한 메시에서 윤곽선 패스를 쓰면 각진 면의 법선이 갈라져 틈이 생기고, 법선을 평균하면 몸 모양이 바뀜</td><td>몸은 원래 메시, 윤곽선은 법선을 평균한 메시 사본을 같은 뼈에 붙인 별도 렌더러로 분리</td></tr>
+          <tr><td class="key">생성 건물 1채 약 200만 삼각형</td><td>3D 생성 도구가 면 수를 지정하지 못함</td><td>Blender 스크립트로 정점 병합 뒤 Decimate 해 집 2만 · 여관 4만 삼각형. 1만 이하로 줄이면 텍스처 경계가 찢어지는 것을 확인하고 하한으로 둠</td></tr>
+          <tr><td class="key">지붕 위에서 몬스터 출현</td><td>NavMesh 가 지붕 윗면에도 구워져 섬 193개가 생김</td><td>키 1.5m 넘는 충돌체 윗면을 Not Walkable 로 지정해 섬 193 → 1, 출현 점의 지형 높이 ±0.8m 검사 추가</td></tr>
+          <tr><td class="key">캐릭터 발밑 표시가 몸에서 어긋남</td><td>프리팹 생성기가 검 · 망토 · 방패까지 포함한 경계 가운데를 원점으로 잡아 몸통이 0.35m 뒤에 섬</td><td>대기 자세의 몸통 렌더러 가운데를 원점에 맞추도록 생성기 수정, 캐릭터 프리팹 전부를 테스트로 검사</td></tr>
+          <tr><td class="key">검사 결과가 실제 코드와 다름</td><td>컴파일이 깨진 상태에서 검사가 이전 어셈블리로 실행됨</td><td>모든 검사 앞에 컴파일 게이트: 오류 · 경고 0, 어느 어셈블리에도 들어가지 않은 새 스크립트까지 확인</td></tr>
+          <tr><td class="key">빌드에서만 예외 24회</td><td>에디터 검사가 다루지 않는 빌드 실행 경로</td><td>빌드 실행 로그(Player.log)의 예외 · 오류 0 을 빌드 검사 조건에 추가</td></tr>
+          <tr><td class="key">에디터가 영구 정지</td><td>MCP bridge 의 비동기 확인을 메인 스레드에서 <code>GetResult()</code> 로 기다려 교착</td><td>메인 스레드에서는 기다리지 않고 호출, 5초 넘는 에디터 작업은 작업 큐(EditorJob)로 넘기고 결과 파일을 기다림</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -302,73 +657,17 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
   <header><h2>구현한 시스템</h2><p>게임 기본 시스템을 먼저 끝내고 시나리오로 넘어가는 순서</p></header>
   <div class="body">
     <div class="skills">
-      <div class="skill"><b>전투</b><span>명중 · 회피 · 치명타(레벨별 명중률 표), 방패 막기(정면 ±70°), 전투 자세 전환, 대쉬 · 백스탭, 히트 스톱 · 흔들림 · 밀림, 무기 종류별 공격 속도</span></div>
-      <div class="skill"><b>성장</b><span>레벨 99 표. 필요 경험치를 「처치 경험치 × 시간당 처치 수 × 레벨당 목표 시간」 식으로 계산, 스탯 6종 분배와 저장</span></div>
-      <div class="skill"><b>아이템 · 강화</b><span>장비 칸 10개, 무기 +15 · 방어구 +10, 안전 +6 이후 확률 표, 3.9초 강화 연출, +7 부터 무기 오라(메시 껍질 3겹 · 흐르는 불꽃 텍스처)</span></div>
-      <div class="skill"><b>마법 · 변신</b><span>마법 21개(1~10단계, 버프 · 회복 · 공격 · 약화), 마법서 상점 · 드롭, 직업별 배울 수 있는 목록. 변신 주문서로 1,200초 변신</span></div>
-      <div class="skill"><b>월드</b><span>게임 하루 24분 낮밤 · 해 방향, 맑음 · 흐림 · 비 무작위 날씨, 바람에 흔들리는 풀 · 잎 셰이더, 출현 구역 11개 · 동시 54마리, NavMesh 영역 분리(마을 · 몬스터)</span></div>
-      <div class="skill"><b>UI</b><span>창 공통 생명주기와 창 스택(Esc 는 맨 위 창만), 원화 상반신을 쓰는 NPC 대화창, 상점 거래 화면, 채팅 창, 회전하는 작은 지도와 클릭 이동</span></div>
-      <div class="skill"><b>데이터 · 저장</b><span>수치 표 23개를 JSON 정본으로 두고 MariaDB 로 내보내기 · 가져오기. 실행 시작 때 한 접속으로 읽어 메모리에 올리고, 저장은 백그라운드 UPSERT, 실패하면 파일로 fallback</span></div>
-      <div class="skill"><b>콘텐츠 묶음</b><span>1~10장 장면 · 장 전용 몬스터 · 장비 외형을 Addressables 원격 묶음으로, 장에 들어갈 때 미리 읽음(https 만, CRC 검사)</span></div>
-      <div class="skill"><b>소리</b><span>배경음악 4곡을 Python 으로 MIDI 작곡 → macOS 내장 GM 음원으로 렌더, 효과음 17종과 빗소리는 코드로 합성</span></div>
-      <div class="skill"><b>구조</b><span>상태 있는 관리 클래스는 <code>BasicBiz&lt;T&gt;</code> 싱글턴(Instance 하나만 public), 순수 규칙은 <code>*Rules</code> static, 상속 없는 class 는 sealed (리플렉션 테스트로 검사)</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="focus" id="art">
-  <header><h2>아트 파이프라인</h2><p>생성 모델 → 감면 · 리깅 → 툰 셰이딩 → 룩북 승인</p></header>
-  <div class="body">
-    <ol class="pipeline">
-      <li><b>설정화</b><span>인물 · 몬스터 · 소품 2D 그림을 이미지 생성 도구로</span></li>
-      <li><b>3D 생성</b><span>면 수 지정 · 자동 리깅 모델(Meshy 7), 인물 3,000 삼각형</span></li>
-      <li><b>Blender 스크립트</b><span>감면(마을 집 약 200만 → 2만 삼각형), 보스 리깅(뼈 34 · 동작 10)</span></li>
-      <li><b>툰 셰이딩</b><span>MToon10 셀 셰이딩 + 법선을 평균한 윤곽선 사본 메시</span></li>
-      <li><b>룩북 승인</b><span>정면 · 옆 · 동작 프레임 시트와 GIF 를 사람이 확인한 뒤에만 게임에 반영</span></li>
-    </ol>
-    <ul>
-      <li>캐릭터 2등신 · 원안 얼굴 유지 · 굵은 윤곽선 + 셀 셰이딩을 그림체 기준으로 정하고, 빌드 장면 전부가 툰 재질 · 윤곽선인지 테스트로 검사합니다.</li>
-      <li>잎 · 풀처럼 잘라 그리는 재질은 윤곽선을 그리지 않고, 그림에 윤곽선이 있는 생성 건물은 윤곽선 사본을 만들지 않는 등 예외를 규칙으로 정리했습니다.</li>
-      <li>크레딧을 쓰는 생성 호출은 에이전트가 정하지 않습니다. 횟수와 비용을 사람에게 묻고, 도구 설정의 승인 목록(<code>permissions.ask</code>)으로 호출마다 승인 창이 뜨게 고정했습니다.</li>
-    </ul>
-  </div>
-</section>
-
-<section class="focus" id="ai">
-  <header><h2>AI 에이전트 운용</h2><p>Claude Code · 권한을 나눠 맡김</p></header>
-  <div class="body">
-    <p>WMS 프로젝트에서 만든 절차를 게임 개발에 옮겼습니다. 이번에는 기술 결정 권한을 에이전트에 넘기고, 사람은 설계안 결정과 결과 검수에 집중합니다.</p>
-    <div class="cols">
-      <div class="panel lead-panel">
-        <h4>사람이 정하는 것</h4>
-        <ul>
-          <li>게임 디자인 · 시나리오 · 그림체 · 화면 구성 · 수치 방향</li>
-          <li>생성 모델 · 동작 · 이펙트의 룩북 승인</li>
-          <li>크레딧을 쓰는 생성 호출의 대상 · 횟수</li>
-          <li>에이전트가 올린 결정 요청 이슈(question 34건)</li>
-        </ul>
-      </div>
-      <div class="panel alt-panel">
-        <h4>에이전트가 정하고 실행하는 것</h4>
-        <ul>
-          <li>구현 방식 · 리팩터링 · 검사와 도구 추가</li>
-          <li>요청을 이슈로 기록하고 계획 문서에 순서 · 완료 기준을 적은 뒤 개발</li>
-          <li>개발 중 발견한 기술 문제는 고치고 보고</li>
-          <li>결정 · 수치가 바뀌면 같은 커밋에서 인수인계 문서 갱신</li>
-        </ul>
-      </div>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>장치</th><th>내용</th></tr></thead>
-        <tbody>
-          <tr><td class="key">인수인계 문서</td><td>세션이 바뀌어도 결정을 이어받도록 <code>docs/HANDOFF.md</code> 를 정본으로 두고 세션 시작 때 먼저 읽음. 파일 존재와 규칙 문구를 테스트가 검사</td></tr>
-          <tr><td class="key">이슈 · 계획</td><td>모든 요청을 이슈(개선 · 버그 · 결정 요청)로 받고 <code>docs/plan/</code> 계획 문서 27개에 순서와 완료 기준을 적음. 커밋 메시지 <code>Closes #N</code> 으로 닫음</td></tr>
-          <tr><td class="key">규칙의 검사화</td><td>사람이 정한 규칙은 테스트로 고정하고 한 번 깨뜨려 실패를 확인. 예: 주석에 요청 인용 · 날짜 · 과거 경위 금지(CommentRuleTests), 상속 없는 class 는 sealed(ScriptFileTests), Data 계층 public static 금지(BasicBizTests)</td></tr>
-          <tr><td class="key">장 규칙 · 화면 기준 문서</td><td>새 장의 상점 · 사냥터 · 경험치 규칙(<code>chapter-rules.md</code>)과 창 · 대화창 · HUD 기준(<code>ui-style.md</code>)을 먼저 읽고 따름</td></tr>
-          <tr><td class="key">병렬 세션</td><td>아이템 생성 시험 · 1장 데이터 같은 작업을 별도 세션으로 나눠 진행하고 계획 문서와 이슈로 합침</td></tr>
-        </tbody>
-      </table>
+      <div class="skill"><b>전투</b><span>명중 · 회피 · 치명타(레벨별 명중률 표), 방패 막기(정면 ±70°, 피해 20%), 전투 자세 전환(윗몸 동작 층), 대쉬 · 백스탭, 히트 스톱 · 흔들림 · 밀림, 무기 종류별 공격 속도, 피해식 한 곳(DamageRules)</span></div>
+      <div class="skill"><b>성장</b><span>레벨 99 표. 필요 경험치를 「구역 몬스터 처치 경험치 기댓값 × 시간당 처치 120 × 레벨당 목표 시간 × 사냥 비율 ÷ (1 − 퀘스트 몫)」으로 계산해 0장 8시간에 Lv10 이 되게 맞춤, 스탯 6종 분배 · 저장</span></div>
+      <div class="skill"><b>아이템 · 강화</b><span>장비 칸 10개(같은 칸 교체 · 해제), 무기 +15 · 방어구 +10, 안전 +6 이후 확률 표, 3.9초 강화 연출, +7 부터 무기 오라(메시를 법선 방향으로 키운 껍질 1~3겹에 흐르는 불꽃 텍스처), 장착 갑옷에 따라 캐릭터 모델 교체</span></div>
+      <div class="skill"><b>보스</b><span>별도 보스 스테이지, 입장 확인 → 등장 영상 → 전투. 패턴은 바닥 경고 표시(붉은 띠 · 원)가 다 차는 순간 타격이 맞도록 동작 시작을 늦춤, 동료 NPC AI, 졸개 소환, 처치 보상 등급 확정 드롭, 쓰러지거나 도망가면 퀘스트 단계를 유지한 채 마을로</span></div>
+      <div class="skill"><b>드롭 · 상점</b><span>드롭 확률 표 70행(몬스터 레벨대 · 누적 처치 수 조건), 자동 줍기, 상점은 자기 분류만 매입, 매력 스탯이 사고팔 값에 반영</span></div>
+      <div class="skill"><b>마법 · 변신</b><span>마법 21개(1~10단계, 버프 · 회복 · 공격 · 약화), 마법력 % 로 효과 증폭, 직업별 배울 수 있는 목록, 변신 주문서로 1,200초 변신(변신 모델이 플레이어 동작을 그대로 따라 함)</span></div>
+      <div class="skill"><b>월드</b><span>게임 하루 24분 낮밤(해 방위 · 고도, 밤 몬스터 공격 1.5배), 맑음 · 흐림 · 비 가중치 날씨, 플레이어 둘레 44m 안에서만 만드는 풀 밭, 출현 구역 11개 · 동시 54마리, NavMesh 영역(마을 · 몬스터) 분리</span></div>
+      <div class="skill"><b>UI</b><span>창 공통 생명주기(UIWindow)와 창 스택(Esc 는 맨 위 창만, 프레임당 한 번), 원화 상반신 NPC 대화창, 상점 거래 화면, 채팅 창(입력 중 게임 키 차단), 카메라 방향으로 회전하는 작은 지도와 클릭 경로 이동</span></div>
+      <div class="skill"><b>저장 · 설정</b><span>저장 데이터 · 설정을 DB 에 백그라운드로 쓰고 파일은 캐시 · fallback, 에디터와 빌드의 플레이어 id 분리, 그래픽 품질 · 음량 · 체력바 표시</span></div>
+      <div class="skill"><b>콘텐츠 배포</b><span>설치본은 0장까지, 1~10장 장면 · 장 전용 몬스터 · 장비 외형은 Addressables 원격 묶음. 로딩 화면이 데이터 → 내려받기(MB 표시) → 장면 순으로 진행</span></div>
+      <div class="skill"><b>소리</b><span>배경음악 4곡을 MIDI 로 작곡해 macOS 내장 음원으로 렌더, 효과음 17종 · 빗소리는 코드 합성, 마을 · 들판 · 전투 · 밤 1.5초 교차 페이드</span></div>
     </div>
   </div>
 </section>
@@ -376,20 +675,73 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
 <section class="focus" id="quality">
   <header><h2>검증 · 성능</h2><p>통과하지 않으면 커밋되지 않음</p></header>
   <div class="body">
-    <ol class="pipeline">
-      <li><b>컴파일 게이트</b><span>모든 어셈블리 컴파일 오류 · 경고 0 (테스트 · 에디터 포함)</span></li>
+    <ol class="pipeline" style="grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));">
+      <li><b>컴파일 게이트</b><span>세 어셈블리 컴파일 오류 · 경고 0</span></li>
       <li><b>EditMode 테스트</b><span>593건 전체 통과</span></li>
-      <li><b>플레이 검사</b><span>플레이 모드 오류 0, 프레임 진행 확인, 게임 카메라 화면 캡처</span></li>
-      <li><b>부하 테스트</b><span>몬스터 60마리 생성 · 처치 5회 + 60초 사냥, 객체 · 재질 · 힙 회귀 확인</span></li>
-      <li><b>빌드 검사</b><span>플레이어 빌드 경고 0, 빌드 실행 로그 예외 0, 측정 fps 30 이상</span></li>
-      <li><b>pre-commit 훅</b><span>마지막 검사가 통과이고 커밋할 파일보다 나중이어야 커밋 허용</span></li>
+      <li><b>플레이 검사</b><span>플레이 모드 오류 0, 프레임 진행, 게임 카메라 캡처</span></li>
+      <li><b>부하 테스트</b><span>생성 · 처치 반복 후 객체 · 재질 · 힙 회귀</span></li>
+      <li><b>빌드 검사</b><span>빌드 경고 0, 실행 로그 예외 0, fps 30 이상</span></li>
+      <li><b>pre-commit</b><span>마지막 검사가 통과이고 파일보다 나중</span></li>
+    </ol>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>테스트 종류</th><th>예</th></tr></thead>
+        <tbody>
+          <tr><td class="key">규칙 · 수치</td><td>강화 성공 · 실패 · 축복 · 저주 경로, 레벨 곡선(0장 8시간 = Lv10), 난이도별 타수 비율, 보스를 이기는 레벨대, 명중 · 회피 한도, 드롭 확률 레벨대</td></tr>
+          <tr><td class="key">데이터 표</td><td>JSON ↔ DB 행 왕복, 아이템 행의 안전 · 최대 강화가 규칙과 같은지, 생성기가 있는 행을 보존하는지</td></tr>
+          <tr><td class="key">장면 · 프리팹</td><td>장면을 열어 컴포넌트 구성 검사, 빌드 장면 전부 툰 재질 · 윤곽선, 캐릭터 프리팹 원점, 몬스터 레이어, 생성 모델 삼각형 수 상한</td></tr>
+          <tr><td class="key">코드 규약</td><td>공통 경로 우회 금지, 컴포넌트 클래스는 자기 이름 파일, 상속 없는 class 는 sealed(리플렉션으로 세 어셈블리), 주석 금지 유형, Data 계층 public static 금지</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>프레임 상한 40(120Hz 화면에서 간격이 고르고 60 대비 작업량 1/3 감소), 창이 뒤에 있으면 15. 빌드 실행 측정(<code>-dq5soak</code>)으로 메모리 · 객체 · 메시 · 재질 수 · fps 를 기록합니다.</li>
+      <li>매 프레임 비용 정리: HUD 글자 · 버프 격자는 값이 바뀐 때만 갱신, 낮밤 조명은 0.25시간 단위, 컴포넌트 조회는 한 번 재서 넘김, 지도 그림은 <code>Graphics.CopyTexture</code>(CPU 읽기 없음).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="art">
+  <header><h2>아트 파이프라인</h2><p>생성 모델 → 감면 · 리깅 → 툰 셰이딩 → 룩북 승인</p></header>
+  <div class="body">
+    <ol class="pipeline">
+      <li><b>설정화</b><span>인물 · 몬스터 · 소품 2D 그림을 이미지 생성 도구로</span></li>
+      <li><b>3D 생성</b><span>면 수 지정 · 자동 리깅 모델, 인물 3,000 삼각형</span></li>
+      <li><b>Blender 스크립트</b><span>감면, 보스 리깅(뼈 34 · 동작 10)</span></li>
+      <li><b>툰 셰이딩</b><span>MToon10 + 윤곽선 사본 메시</span></li>
+      <li><b>룩북 승인</b><span>정면 · 옆 · 동작 프레임 시트와 GIF 확인 뒤 반영</span></li>
     </ol>
     <ul>
-      <li>부하 테스트로 처치마다 재질이 쌓이던 누수를 찾았고, 빌드 실행 로그 검사로 에디터 검사에 안 나온 예외를 찾았습니다.</li>
-      <li>전투 이펙트를 종류별 파티클 시스템 8개 재사용 방식으로 바꿔 몰림 구간 플레이어 루프 9~13ms → 6.8ms, 파티클 시스템 92 → 18 로 줄였습니다.</li>
-      <li>프레임 상한 40(발열 감소), 평균 30 아래로 2초 떨어지면 MSAA → 그림자 → 렌더 배율 순으로 화질 단계를 낮추는 조절기를 두었습니다.</li>
-      <li>MToon 셰이더에 DOTS 인스턴싱 변형이 없어 GPU Resident Drawer 를 켜면 플레이 중에만 물체가 분홍색이 되는 문제는, 에디터 렌더가 아니라 플레이 화면 캡처를 확인해야 보인다는 규칙으로 정리했습니다.</li>
+      <li>프리팹 · 동작 컨트롤러는 에디터 생성기 코드로 만들고, 다시 만들 때 GUID 를 유지해 장면 참조가 끊기지 않게 합니다.</li>
+      <li>크레딧을 쓰는 생성 호출은 에이전트가 정하지 않습니다. 도구 설정의 승인 목록(<code>permissions.ask</code>)으로 호출마다 승인 창이 뜨게 고정했습니다.</li>
     </ul>
+  </div>
+</section>
+
+<section id="ai">
+  <header><h2>AI 에이전트 운용</h2><p>Claude Code · 권한을 나눠 맡김</p></header>
+  <div class="body">
+    <p>WMS 프로젝트에서 만든 절차를 게임 개발에 옮겼고, 이번에는 기술 결정 권한을 에이전트에 넘겼습니다. 대신 위의 검사가 통과하지 않으면 커밋할 수 없습니다.</p>
+    <div class="cols">
+      <div class="panel lead-panel">
+        <h4>사람이 정하는 것</h4>
+        <ul>
+          <li>게임 디자인 · 시나리오 · 그림체 · 화면 구성 · 수치 방향</li>
+          <li>생성 모델 · 동작 · 이펙트의 룩북 승인</li>
+          <li>크레딧을 쓰는 생성 호출의 대상 · 횟수</li>
+          <li>결정 요청 이슈(question 34건)</li>
+        </ul>
+      </div>
+      <div class="panel alt-panel">
+        <h4>에이전트가 정하고 실행하는 것</h4>
+        <ul>
+          <li>구현 방식 · 리팩터링 · 검사와 도구 추가</li>
+          <li>요청을 이슈로 기록하고 계획 문서(27개)에 순서 · 완료 기준을 적은 뒤 개발</li>
+          <li>개발 중 발견한 기술 문제는 고치고 보고</li>
+          <li>결정이 바뀌면 같은 커밋에서 인수인계 문서 갱신(존재 · 문구를 테스트가 검사)</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -399,8 +751,8 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
     <ol class="timeline">
       <li><span class="d">10-05</span><span>Unity 6 URP 프로젝트 생성, 테스트 · 플레이 검사 스크립트</span></li>
       <li><span class="d">10-09 ~ 13</span><span>인벤토리 · 장비 · 레벨 · 단축키 · NPC 대화 · 몬스터 출현 규칙, 툰 그림체 적용</span></li>
-      <li><span class="d">10-14 ~ 15</span><span>낮밤 · 소리 · 지도 · 수치 표 DB 이관, 전체 코드 검토 뒤 이슈 8건 정리, 싱글턴 · sealed · 주석 규칙. 하루 커밋 53건</span></li>
-      <li><span class="d">10-16</span><span>상하단 HUD · 창 통일 · 마법 21개 · 스탯 분배 · 강화 연출 · 보스 게이트, 생성 건물로 마을 재구성, 빌드 최적화</span></li>
+      <li><span class="d">10-14 ~ 15</span><span>낮밤 · 소리 · 지도, 수치 표 DB 이관, 전체 코드 검토 뒤 이슈 8건 정리, 싱글턴 · sealed · 주석 규칙과 검사. 하루 커밋 53건</span></li>
+      <li><span class="d">10-16</span><span>상하단 HUD · 창 통일 · 마법 21개 · 스탯 분배 · 강화 연출 · 보스 게이트, 빌드 최적화(최대 40fps · Mesh LOD · 윤곽선 · 풀 거리 컬링)</span></li>
       <li><span class="d">10-17</span><span>장비 칸 10개 · 갑옷 외형 · 무작위 날씨 · 보스 2페이즈, 장별 콘텐츠를 Addressables 원격 묶음으로</span></li>
       <li><span class="d">10-18</span><span>0장 구역 레벨과 경험치 곡선 재계산, 매력 스탯 · 직업별 마법 목록, 1장 몬스터 묶음 · 미리 읽기</span></li>
     </ol>
@@ -408,8 +760,8 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
       <h4>다음 순서</h4>
       <ul>
         <li>기본 시스템 마무리: 장비 등급 · 랜덤 옵션 표, 1장 장면</li>
-        <li>서버 · 계정: 다중접속 전에 저장 데이터를 플레이어별로 격리</li>
-        <li>연출 · 시나리오: 전체 10장 설계와 장면 334개 대본 초안을 사람과 확정한 뒤 구현</li>
+        <li>서버 · 계정: 다중접속 전에 저장 데이터를 플레이어별로 격리, 채팅 · 다중접속 공유 자료는 불변 스냅샷 방식 유지</li>
+        <li>연출 · 시나리오: 전체 10장 설계와 장면 334개 대본 초안을 확정한 뒤 구현</li>
       </ul>
     </div>
   </div>
