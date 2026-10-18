@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>진행 중 프로젝트 · Unity RPG</title>
+<meta name="description" content="Unity 6 3D 액션 RPG 를 AI 코딩 에이전트와 권한을 나눠 개발하는 진행 중 프로젝트">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+
+:root {
+  --paper: #f3f4f7;
+  --surface: #ffffff;
+  --ink: #141b29;
+  --muted: #586174;
+  --line: #dde1e9;
+  --accent: #d9581a;      /* 표시기 램프 주황 */
+  --accent-soft: #fcebe1;
+  --navy: #1f3761;
+  --navy-soft: #e8edf6;
+  --ok: #1f7a4d;
+  --code-bg: #eef0f5;
+  --code-ink: #1d2533;
+  --code-mute: #6b7486;
+  --code-key: #8a3b12;
+  --code-str: #1f6a4a;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 0.9375rem;
+  --step-1: 1.125rem;
+  --step-2: 1.5rem;
+  --step-3: clamp(2rem, 4.4vw, 3.25rem);
+  --radius: 10px;         /* 상자는 모두 10px, 태그만 4px */
+  --nav-h: 56px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e131b; --surface: #161d29; --ink: #e6eaf1; --muted: #9ba5b6; --line: #283245;
+    --accent: #f0803f; --accent-soft: #33200f; --navy: #a9c1e8; --navy-soft: #1b2740; --ok: #5cc48f;
+    --code-bg: #111823; --code-ink: #dfe5ee; --code-mute: #8994a6; --code-key: #f3a26f; --code-str: #7fd1a6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e131b; --surface: #161d29; --ink: #e6eaf1; --muted: #9ba5b6; --line: #283245;
+  --accent: #f0803f; --accent-soft: #33200f; --navy: #a9c1e8; --navy-soft: #1b2740; --ok: #5cc48f;
+  --code-bg: #111823; --code-ink: #dfe5ee; --code-mute: #8994a6; --code-key: #f3a26f; --code-str: #7fd1a6;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.7;
+  margin: 0;
+  padding-inline: 16px;
+  padding-block: 0 64px;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1160px; margin-inline: auto; }
+h1, h2, h3, h4 { text-wrap: balance; line-height: 1.3; margin: 0; }
+p { margin: 0; }
+a { color: var(--navy); }
+code, .mono { font-family: var(--font-mono); font-size: 0.92em; }
+.num { font-variant-numeric: tabular-nums; }
+.fill { color: var(--accent); font-weight: 600; }
+
+/* 상단 목차 */
+.topnav { position: sticky; top: 0; z-index: 10; margin-inline: -16px; padding-inline: 16px; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.topnav > div { max-width: 1160px; margin-inline: auto; height: var(--nav-h); display: flex; align-items: center; gap: 24px; }
+.topnav b { font-weight: 700; white-space: nowrap; }
+.topnav nav { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.topnav nav::-webkit-scrollbar { display: none; }
+.topnav a { font-size: var(--step--1); color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: var(--radius); white-space: nowrap; transition: color .2s, background-color .2s; }
+.topnav a:hover { color: var(--ink); background: var(--navy-soft); }
+
+/* 머리 */
+.masthead { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 48px; align-items: end; padding-block: 72px 56px; border-bottom: 1px solid var(--line); }
+.masthead .head { display: grid; gap: 20px; }
+.eyebrow { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.04em; color: var(--accent); }
+.masthead h1 { font-size: var(--step-3); font-weight: 700; letter-spacing: -0.025em; line-height: 1.18; }
+.masthead .lead { font-size: var(--step-1); color: var(--muted); max-width: 34em; }
+.profile { margin: 0; display: grid; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 20px; font-size: var(--step-0); }
+.profile div { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); min-width: 0; }
+.profile div:last-child { border-bottom: 0; }
+.profile dt { color: var(--muted); font-size: var(--step--1); padding-top: 2px; }
+.profile dd { margin: 0; font-weight: 600; }
+@media (max-width: 860px) { .masthead { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 40px 36px; } }
+
+/* 섹션 */
+section { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; padding-block: 64px; border-bottom: 1px solid var(--line); scroll-margin-top: var(--nav-h); }
+section > header { display: grid; align-content: start; gap: 8px; position: sticky; top: calc(var(--nav-h) + 24px); align-self: start; }
+section > header h2 { font-size: var(--step-2); font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; }
+section > header p { font-size: var(--step--1); color: var(--muted); }
+.focus > header { border-left: 3px solid var(--accent); padding-left: 14px; }
+.body { display: grid; gap: 24px; min-width: 0; }
+.body > p { max-width: 46em; }
+.body > p.intro { font-size: var(--step-1); }
+.body h3 { font-size: var(--step-0); font-weight: 700; }
+.sub { display: grid; gap: 14px; padding-top: 8px; }
+.sub > h3 { font-size: var(--step-1); font-weight: 700; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.sub > h3 small { font-size: var(--step--1); font-weight: 400; color: var(--muted); margin-left: 8px; }
+@media (max-width: 860px) {
+  section { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-block: 40px; }
+  section > header { position: static; }
+}
+
+/* 수치 */
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stats.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.stat .k { font-size: var(--step--1); color: var(--muted); }
+.stat .v { font-family: var(--font-mono); font-size: 1.75rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--navy); }
+.stat .s { font-size: var(--step--1); color: var(--muted); }
+.stats:not(.four) .stat:first-child { background: var(--navy-soft); border-color: transparent; }
+.stats:not(.four) .stat:last-child { background: var(--accent-soft); border-color: transparent; }
+.stats:not(.four) .stat:last-child .v { color: var(--accent); }
+@media (max-width: 640px) { .stats, .stats.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stat .v { font-size: 1.4rem; } }
+.note { font-size: var(--step--1); color: var(--muted); max-width: 52em; }
+
+/* 기간 */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-left: 2px solid var(--line); }
+.timeline li { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 16px; padding: 10px 0 10px 20px; position: relative; }
+.timeline li::before { content: ""; position: absolute; left: -6px; top: 19px; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--navy); }
+.timeline li:first-child::before { background: var(--accent); border-color: var(--accent); }
+.timeline .d { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); padding-top: 2px; }
+@media (max-width: 640px) { .timeline li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+/* 표 */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: var(--step--1); }
+th, td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 500; background: var(--paper); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.arrow, td.key { white-space: nowrap; font-weight: 600; }
+td.key { font-family: var(--font-mono); font-weight: 500; color: var(--navy); }
+.tag { display: inline-block; font-size: 0.75rem; padding: 1px 8px; border-radius: 4px; white-space: nowrap; font-weight: 500; }
+.tag.done { color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); }
+.tag.wip { color: var(--accent); background: var(--accent-soft); }
+
+/* 2열 */
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 640px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.panel h3, .panel h4 { font-size: var(--step-0); font-weight: 700; }
+.panel ul, .body ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.panel li::marker, .body li::marker { color: var(--accent); }
+.panel.lead-panel { background: var(--navy-soft); border-color: transparent; }
+.panel.alt-panel { background: var(--accent-soft); border-color: transparent; }
+.panel .meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); padding-top: 8px; border-top: 1px solid var(--line); }
+
+/* 역량 지도 */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+.skill { padding: 14px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 8em minmax(0, 1fr); gap: 14px; min-width: 0; }
+.skill b { font-size: var(--step--1); color: var(--navy); }
+.skill span { font-size: var(--step--1); }
+@media (max-width: 640px) { .skills { grid-template-columns: minmax(0, 1fr); } }
+
+/* 그림 */
+.figure { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; overflow-x: auto; }
+.figure svg { display: block; width: 100%; min-width: 700px; height: auto; }
+.figure svg text { font-family: var(--font-body); fill: var(--ink); }
+.figure svg .t-mute { fill: var(--muted); }
+.figure svg .t-mono { font-family: var(--font-mono); }
+.figure svg .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.figure svg .box-app { fill: var(--navy-soft); stroke: var(--navy); stroke-width: 1.5; }
+.figure svg .box-hot { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.figure svg .wire { stroke: var(--muted); stroke-width: 1.4; fill: none; }
+.figure svg .wire-hot { stroke: var(--accent); stroke-width: 1.6; fill: none; }
+.figure svg .arrowhead { fill: var(--muted); }
+.figure svg .arrowhead-hot { fill: var(--accent); }
+.points { counter-reset: p; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.points li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; grid-template-columns: 1.6em minmax(0, 1fr); gap: 8px; }
+.points li::before { counter-increment: p; content: counter(p); font-family: var(--font-mono); color: var(--accent); font-weight: 600; }
+@media (max-width: 640px) { .points { grid-template-columns: minmax(0, 1fr); } }
+
+/* 파이프라인 */
+.pipeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; counter-reset: s; }
+.pipeline li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.pipeline li::before { counter-increment: s; content: counter(s, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--step--1); font-weight: 600; color: var(--accent); }
+.pipeline b { font-size: var(--step-0); }
+.pipeline span { font-size: var(--step--1); color: var(--muted); }
+
+/* 코드 */
+.code-card { display: grid; gap: 12px; min-width: 0; }
+.code-card + .code-card { padding-top: 24px; border-top: 1px solid var(--line); }
+.code-card h3 { font-size: var(--step-1); font-weight: 700; }
+.code-card .why { font-size: var(--step--1); color: var(--muted); max-width: 52em; }
+.code-card .why b { color: var(--ink); font-weight: 600; }
+.code-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 760px) { .code-pair { grid-template-columns: minmax(0, 1fr); } }
+figure.code { margin: 0; min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--code-bg); overflow: hidden; }
+figure.code figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--code-mute); padding: 8px 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 8px; }
+figure.code pre { margin: 0; padding: 14px; overflow-x: auto; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.65; color: var(--code-ink); }
+pre .c { color: var(--code-mute); }
+pre .k { color: var(--code-key); }
+pre .s { color: var(--code-str); }
+
+/* 화면 */
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 640px) { .shots { grid-template-columns: minmax(0, 1fr); } }
+.shot { margin: 0; display: grid; gap: 8px; min-width: 0; align-content: start; }
+.shot.wide { grid-column: 1 / -1; }
+.shots.phones { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 640px) { .shots.phones { grid-template-columns: minmax(0, 1fr); } }
+.shot img { border: 1px solid var(--line); border-radius: var(--radius); display: block; width: 100%; height: auto; }
+.shot figcaption { font-size: var(--step--1); color: var(--muted); }
+.slot { aspect-ratio: 16 / 9; max-width: 100%; border: 1.5px dashed var(--line); border-radius: var(--radius); background: var(--surface); display: grid; place-content: center; text-align: center; gap: 4px; padding: 12px; }
+.slot b { font-size: var(--step-0); }
+.slot span { font-size: var(--step--1); color: var(--muted); }
+
+footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--muted); display: grid; gap: 4px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media print {
+  :root {
+    --paper: #ffffff; --surface: #ffffff; --ink: #111827; --muted: #4b5563; --line: #d1d5db;
+    --code-bg: #f6f7f9; --code-ink: #111827; --code-mute: #6b7280; --radius: 6px;
+    color-scheme: light;
+  }
+  @page { size: A4; margin: 12mm 12mm 14mm; }
+  body { padding: 0; font-size: 9.6pt; line-height: 1.6; }
+  .topnav { display: none; }
+  .masthead { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; padding-block: 0 16px; }
+  .masthead h1 { font-size: 22pt; }
+  .profile { padding: 2px 12px; font-size: 9pt; }
+  .profile div { padding-block: 6px; }
+  section { grid-template-columns: minmax(0, 1fr); gap: 10px; padding-block: 14px; break-inside: auto; }
+  section > header { position: static; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; break-after: avoid; }
+  section > header h2 { font-size: 13pt; }
+  .body { gap: 12px; }
+  .stat { padding: 10px 12px; }
+  .stat .v { font-size: 15pt; }
+  .panel { padding: 12px 14px; }
+  .stats, .panel, .skill, figure.code, .shot, .pipeline li, .points li, .timeline li, .slot, tr { break-inside: avoid; }
+  .sub > h3, .code-card > h3, .body h3 { break-after: avoid; }
+  .pipeline { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .slot { aspect-ratio: auto; min-height: 90px; }
+  figure.code pre { white-space: pre-wrap; overflow: visible; font-size: 7.4pt; }
+  .figure { overflow: visible; }
+  .figure svg { min-width: 0; }
+  .table-wrap { overflow: visible; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topnav"><div><b>진행 중 프로젝트</b><nav aria-label="목차"><a href="./">← 포트폴리오</a><a href="#summary">요약</a><a href="#screens">화면</a><a href="#systems">시스템</a><a href="#art">아트</a><a href="#ai">AI 운용</a><a href="#quality">검증</a><a href="#now">진행</a></nav></div></div>
+
+<header class="masthead">
+  <div class="head">
+    <p class="eyebrow">진행 중 프로젝트 · 기준일 2026-10-18</p>
+    <h1>Unity 6 3D 액션 RPG<br>「일곱 봉인석」</h1>
+    <p class="lead">동화풍 판타지 3D RPG 를 Unity 6 · C# 로 개발하고 있습니다. 게임 디자인 · 시나리오 · 그림체 · 수치 방향은 사람이 정하고, 구현 방식 · 리팩터링 · 검사 추가 같은 기술 결정은 AI 코딩 에이전트(Claude Code)가 정해 실행하도록 권한을 나눴습니다. 결과물은 테스트 · 플레이 검사 · 부하 측정 · 빌드 경고 0 을 통과해야 커밋됩니다.</p>
+  </div>
+  <dl class="profile">
+    <div><dt>엔진</dt><dd>Unity 6.6 · URP</dd></div>
+    <div><dt>언어</dt><dd>C# (약 3.7만 줄)</dd></div>
+    <div><dt>기간</dt><dd>2026-10-05 ~ 진행 중</dd></div>
+    <div><dt>역할</dt><dd>설계안 결정 · 검수 (사람) · 구현 (에이전트)</dd></div>
+  </dl>
+</header>
+
+<section id="summary">
+  <header><h2>요약</h2><p>2026-10-18 저장소 측정</p></header>
+  <div class="body">
+    <p class="intro">2주 동안 작업일 12일에 커밋 218건 · GitHub 이슈 208건을 처리했습니다. 전투 · 성장 · 아이템 · 강화 · 마법 · 변신 · 상점 · NPC 대화 · 날씨 · 낮밤 · 저장을 구현했고, 수치는 모두 DB 표로 관리합니다. 규칙과 수치는 EditMode 테스트 593건으로 고정했습니다.</p>
+    <div class="stats">
+      <div class="stat"><span class="k">커밋</span><span class="v">218</span><span class="s">작업일 12일 · 모두 AI 공동작성</span></div>
+      <div class="stat"><span class="k">GitHub 이슈</span><span class="v">208 / 181</span><span class="s">전체 / 닫힘 · 개선 157 · 버그 34 · 결정 요청 34</span></div>
+      <div class="stat"><span class="k">자동 테스트</span><span class="v">593</span><span class="s">NUnit EditMode (Test · TestCase)</span></div>
+      <div class="stat"><span class="k">C# 코드</span><span class="v">37,187줄</span><span class="s">게임 18,550 · 에디터 도구 8,309 · 테스트 10,328</span></div>
+      <div class="stat"><span class="k">데이터 표</span><span class="v">23</span><span class="s">JSON 정본 ↔ MariaDB</span></div>
+      <div class="stat"><span class="k">문서</span><span class="v">65</span><span class="s">마크다운 15,476줄 (계획 · 규칙 · 시나리오)</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="screens">
+  <header><h2>화면</h2><p>플레이 검사 스크립트가 찍은 실제 플레이 화면</p></header>
+  <div class="body">
+    <div class="shots">
+      <figure class="shot wide"><img src="game/village.jpg" alt="마을 광장에서 용사가 서 있는 쿼터뷰 플레이 화면, 상단 초상·자원·작은 지도, 하단 HP·MP 바와 채팅 창" loading="lazy" width="1400" height="614"><figcaption>0장 마을 광장. 쿼터뷰 카메라, 상단 HUD(초상 · 전투력 · 자원 · 작은 지도 · 퀘스트), 하단 HUD(상태 · HP | MP · 채팅 · 단축키 16칸)</figcaption></figure>
+      <figure class="shot"><img src="game/status.jpg" alt="상태 창: 능력치, 스탯 분배, 캐릭터 3D 미리보기와 장비 칸 10개" loading="lazy" width="1400" height="614"><figcaption>상태 창(C). 3D 미리보기 둘레 장비 칸 10개, 스탯 분배, +8 무기</figcaption></figure>
+      <figure class="shot"><img src="game/inventory.jpg" alt="소지품 창: 장비 칸 판과 분류 탭, 마법서·물약 아이콘 격자" loading="lazy" width="1400" height="614"><figcaption>소지품 창. 분류 탭 4개, 마법서 21종 아이콘(단계별 표지 색)</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="focus" id="systems">
+  <header><h2>구현한 시스템</h2><p>게임 기본 시스템을 먼저 끝내고 시나리오로 넘어가는 순서</p></header>
+  <div class="body">
+    <div class="skills">
+      <div class="skill"><b>전투</b><span>명중 · 회피 · 치명타(레벨별 명중률 표), 방패 막기(정면 ±70°), 전투 자세 전환, 대쉬 · 백스탭, 히트 스톱 · 흔들림 · 밀림, 무기 종류별 공격 속도</span></div>
+      <div class="skill"><b>성장</b><span>레벨 99 표. 필요 경험치를 「처치 경험치 × 시간당 처치 수 × 레벨당 목표 시간」 식으로 계산, 스탯 6종 분배와 저장</span></div>
+      <div class="skill"><b>아이템 · 강화</b><span>장비 칸 10개, 무기 +15 · 방어구 +10, 안전 +6 이후 확률 표, 3.9초 강화 연출, +7 부터 무기 오라(메시 껍질 3겹 · 흐르는 불꽃 텍스처)</span></div>
+      <div class="skill"><b>마법 · 변신</b><span>마법 21개(1~10단계, 버프 · 회복 · 공격 · 약화), 마법서 상점 · 드롭, 직업별 배울 수 있는 목록. 변신 주문서로 1,200초 변신</span></div>
+      <div class="skill"><b>월드</b><span>게임 하루 24분 낮밤 · 해 방향, 맑음 · 흐림 · 비 무작위 날씨, 바람에 흔들리는 풀 · 잎 셰이더, 출현 구역 11개 · 동시 54마리, NavMesh 영역 분리(마을 · 몬스터)</span></div>
+      <div class="skill"><b>UI</b><span>창 공통 생명주기와 창 스택(Esc 는 맨 위 창만), 원화 상반신을 쓰는 NPC 대화창, 상점 거래 화면, 채팅 창, 회전하는 작은 지도와 클릭 이동</span></div>
+      <div class="skill"><b>데이터 · 저장</b><span>수치 표 23개를 JSON 정본으로 두고 MariaDB 로 내보내기 · 가져오기. 실행 시작 때 한 접속으로 읽어 메모리에 올리고, 저장은 백그라운드 UPSERT, 실패하면 파일로 fallback</span></div>
+      <div class="skill"><b>콘텐츠 묶음</b><span>1~10장 장면 · 장 전용 몬스터 · 장비 외형을 Addressables 원격 묶음으로, 장에 들어갈 때 미리 읽음(https 만, CRC 검사)</span></div>
+      <div class="skill"><b>소리</b><span>배경음악 4곡을 Python 으로 MIDI 작곡 → macOS 내장 GM 음원으로 렌더, 효과음 17종과 빗소리는 코드로 합성</span></div>
+      <div class="skill"><b>구조</b><span>상태 있는 관리 클래스는 <code>BasicBiz&lt;T&gt;</code> 싱글턴(Instance 하나만 public), 순수 규칙은 <code>*Rules</code> static, 상속 없는 class 는 sealed (리플렉션 테스트로 검사)</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="focus" id="art">
+  <header><h2>아트 파이프라인</h2><p>생성 모델 → 감면 · 리깅 → 툰 셰이딩 → 룩북 승인</p></header>
+  <div class="body">
+    <ol class="pipeline">
+      <li><b>설정화</b><span>인물 · 몬스터 · 소품 2D 그림을 이미지 생성 도구로</span></li>
+      <li><b>3D 생성</b><span>면 수 지정 · 자동 리깅 모델(Meshy 7), 인물 3,000 삼각형</span></li>
+      <li><b>Blender 스크립트</b><span>감면(마을 집 약 200만 → 2만 삼각형), 보스 리깅(뼈 34 · 동작 10)</span></li>
+      <li><b>툰 셰이딩</b><span>MToon10 셀 셰이딩 + 법선을 평균한 윤곽선 사본 메시</span></li>
+      <li><b>룩북 승인</b><span>정면 · 옆 · 동작 프레임 시트와 GIF 를 사람이 확인한 뒤에만 게임에 반영</span></li>
+    </ol>
+    <ul>
+      <li>캐릭터 2등신 · 원안 얼굴 유지 · 굵은 윤곽선 + 셀 셰이딩을 그림체 기준으로 정하고, 빌드 장면 전부가 툰 재질 · 윤곽선인지 테스트로 검사합니다.</li>
+      <li>잎 · 풀처럼 잘라 그리는 재질은 윤곽선을 그리지 않고, 그림에 윤곽선이 있는 생성 건물은 윤곽선 사본을 만들지 않는 등 예외를 규칙으로 정리했습니다.</li>
+      <li>크레딧을 쓰는 생성 호출은 에이전트가 정하지 않습니다. 횟수와 비용을 사람에게 묻고, 도구 설정의 승인 목록(<code>permissions.ask</code>)으로 호출마다 승인 창이 뜨게 고정했습니다.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="focus" id="ai">
+  <header><h2>AI 에이전트 운용</h2><p>Claude Code · 권한을 나눠 맡김</p></header>
+  <div class="body">
+    <p>WMS 프로젝트에서 만든 절차를 게임 개발에 옮겼습니다. 이번에는 기술 결정 권한을 에이전트에 넘기고, 사람은 설계안 결정과 결과 검수에 집중합니다.</p>
+    <div class="cols">
+      <div class="panel lead-panel">
+        <h4>사람이 정하는 것</h4>
+        <ul>
+          <li>게임 디자인 · 시나리오 · 그림체 · 화면 구성 · 수치 방향</li>
+          <li>생성 모델 · 동작 · 이펙트의 룩북 승인</li>
+          <li>크레딧을 쓰는 생성 호출의 대상 · 횟수</li>
+          <li>에이전트가 올린 결정 요청 이슈(question 34건)</li>
+        </ul>
+      </div>
+      <div class="panel alt-panel">
+        <h4>에이전트가 정하고 실행하는 것</h4>
+        <ul>
+          <li>구현 방식 · 리팩터링 · 검사와 도구 추가</li>
+          <li>요청을 이슈로 기록하고 계획 문서에 순서 · 완료 기준을 적은 뒤 개발</li>
+          <li>개발 중 발견한 기술 문제는 고치고 보고</li>
+          <li>결정 · 수치가 바뀌면 같은 커밋에서 인수인계 문서 갱신</li>
+        </ul>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>장치</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="key">인수인계 문서</td><td>세션이 바뀌어도 결정을 이어받도록 <code>docs/HANDOFF.md</code> 를 정본으로 두고 세션 시작 때 먼저 읽음. 파일 존재와 규칙 문구를 테스트가 검사</td></tr>
+          <tr><td class="key">이슈 · 계획</td><td>모든 요청을 이슈(개선 · 버그 · 결정 요청)로 받고 <code>docs/plan/</code> 계획 문서 27개에 순서와 완료 기준을 적음. 커밋 메시지 <code>Closes #N</code> 으로 닫음</td></tr>
+          <tr><td class="key">규칙의 검사화</td><td>사람이 정한 규칙은 테스트로 고정하고 한 번 깨뜨려 실패를 확인. 예: 주석에 요청 인용 · 날짜 · 과거 경위 금지(CommentRuleTests), 상속 없는 class 는 sealed(ScriptFileTests), Data 계층 public static 금지(BasicBizTests)</td></tr>
+          <tr><td class="key">장 규칙 · 화면 기준 문서</td><td>새 장의 상점 · 사냥터 · 경험치 규칙(<code>chapter-rules.md</code>)과 창 · 대화창 · HUD 기준(<code>ui-style.md</code>)을 먼저 읽고 따름</td></tr>
+          <tr><td class="key">병렬 세션</td><td>아이템 생성 시험 · 1장 데이터 같은 작업을 별도 세션으로 나눠 진행하고 계획 문서와 이슈로 합침</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="focus" id="quality">
+  <header><h2>검증 · 성능</h2><p>통과하지 않으면 커밋되지 않음</p></header>
+  <div class="body">
+    <ol class="pipeline">
+      <li><b>컴파일 게이트</b><span>모든 어셈블리 컴파일 오류 · 경고 0 (테스트 · 에디터 포함)</span></li>
+      <li><b>EditMode 테스트</b><span>593건 전체 통과</span></li>
+      <li><b>플레이 검사</b><span>플레이 모드 오류 0, 프레임 진행 확인, 게임 카메라 화면 캡처</span></li>
+      <li><b>부하 테스트</b><span>몬스터 60마리 생성 · 처치 5회 + 60초 사냥, 객체 · 재질 · 힙 회귀 확인</span></li>
+      <li><b>빌드 검사</b><span>플레이어 빌드 경고 0, 빌드 실행 로그 예외 0, 측정 fps 30 이상</span></li>
+      <li><b>pre-commit 훅</b><span>마지막 검사가 통과이고 커밋할 파일보다 나중이어야 커밋 허용</span></li>
+    </ol>
+    <ul>
+      <li>부하 테스트로 처치마다 재질이 쌓이던 누수를 찾았고, 빌드 실행 로그 검사로 에디터 검사에 안 나온 예외를 찾았습니다.</li>
+      <li>전투 이펙트를 종류별 파티클 시스템 8개 재사용 방식으로 바꿔 몰림 구간 플레이어 루프 9~13ms → 6.8ms, 파티클 시스템 92 → 18 로 줄였습니다.</li>
+      <li>프레임 상한 40(발열 감소), 평균 30 아래로 2초 떨어지면 MSAA → 그림자 → 렌더 배율 순으로 화질 단계를 낮추는 조절기를 두었습니다.</li>
+      <li>MToon 셰이더에 DOTS 인스턴싱 변형이 없어 GPU Resident Drawer 를 켜면 플레이 중에만 물체가 분홍색이 되는 문제는, 에디터 렌더가 아니라 플레이 화면 캡처를 확인해야 보인다는 규칙으로 정리했습니다.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="now">
+  <header><h2>진행 상황</h2><p>2026-10-05 ~ 10-18</p></header>
+  <div class="body">
+    <ol class="timeline">
+      <li><span class="d">10-05</span><span>Unity 6 URP 프로젝트 생성, 테스트 · 플레이 검사 스크립트</span></li>
+      <li><span class="d">10-09 ~ 13</span><span>인벤토리 · 장비 · 레벨 · 단축키 · NPC 대화 · 몬스터 출현 규칙, 툰 그림체 적용</span></li>
+      <li><span class="d">10-14 ~ 15</span><span>낮밤 · 소리 · 지도 · 수치 표 DB 이관, 전체 코드 검토 뒤 이슈 8건 정리, 싱글턴 · sealed · 주석 규칙. 하루 커밋 53건</span></li>
+      <li><span class="d">10-16</span><span>상하단 HUD · 창 통일 · 마법 21개 · 스탯 분배 · 강화 연출 · 보스 게이트, 생성 건물로 마을 재구성, 빌드 최적화</span></li>
+      <li><span class="d">10-17</span><span>장비 칸 10개 · 갑옷 외형 · 무작위 날씨 · 보스 2페이즈, 장별 콘텐츠를 Addressables 원격 묶음으로</span></li>
+      <li><span class="d">10-18</span><span>0장 구역 레벨과 경험치 곡선 재계산, 매력 스탯 · 직업별 마법 목록, 1장 몬스터 묶음 · 미리 읽기</span></li>
+    </ol>
+    <div class="panel">
+      <h4>다음 순서</h4>
+      <ul>
+        <li>기본 시스템 마무리: 장비 등급 · 랜덤 옵션 표, 1장 장면</li>
+        <li>서버 · 계정: 다중접속 전에 저장 데이터를 플레이어별로 격리</li>
+        <li>연출 · 시나리오: 전체 10장 설계와 장면 334개 대본 초안을 사람과 확정한 뒤 구현</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>수치는 2026-10-18 저장소 기준입니다. 저장소는 비공개이며, 소스 코드와 플레이는 요청하시면 화면 공유로 보여드립니다.</p>
+</footer>
+
+</div>
+</body>
+</html>
