@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>경력 기술서</title>
+<meta name="description" content="게임 서비스 플랫폼 개발과 개발 조직 운영 경력, 현재 진행 중인 온라인 3D RPG 프로젝트">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+
+:root {
+  --paper: #f3f4f7;
+  --surface: #ffffff;
+  --ink: #141b29;
+  --muted: #586174;
+  --line: #dde1e9;
+  --accent: #d9581a;      /* 표시기 램프 주황 */
+  --accent-soft: #fcebe1;
+  --navy: #1f3761;
+  --navy-soft: #e8edf6;
+  --ok: #1f7a4d;
+  --code-bg: #eef0f5;
+  --code-ink: #1d2533;
+  --code-mute: #6b7486;
+  --code-key: #8a3b12;
+  --code-str: #1f6a4a;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 0.9375rem;
+  --step-1: 1.125rem;
+  --step-2: 1.5rem;
+  --step-3: clamp(2rem, 4.4vw, 3.25rem);
+  --radius: 10px;         /* 상자는 모두 10px, 태그만 4px */
+  --nav-h: 56px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e131b; --surface: #161d29; --ink: #e6eaf1; --muted: #9ba5b6; --line: #283245;
+    --accent: #f0803f; --accent-soft: #33200f; --navy: #a9c1e8; --navy-soft: #1b2740; --ok: #5cc48f;
+    --code-bg: #111823; --code-ink: #dfe5ee; --code-mute: #8994a6; --code-key: #f3a26f; --code-str: #7fd1a6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e131b; --surface: #161d29; --ink: #e6eaf1; --muted: #9ba5b6; --line: #283245;
+  --accent: #f0803f; --accent-soft: #33200f; --navy: #a9c1e8; --navy-soft: #1b2740; --ok: #5cc48f;
+  --code-bg: #111823; --code-ink: #dfe5ee; --code-mute: #8994a6; --code-key: #f3a26f; --code-str: #7fd1a6;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.7;
+  margin: 0;
+  padding-inline: 16px;
+  padding-block: 0 64px;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1160px; margin-inline: auto; }
+h1, h2, h3, h4 { text-wrap: balance; line-height: 1.3; margin: 0; }
+p { margin: 0; }
+a { color: var(--navy); }
+code, .mono { font-family: var(--font-mono); font-size: 0.92em; }
+.num { font-variant-numeric: tabular-nums; }
+.fill { color: var(--accent); font-weight: 600; }
+
+/* 상단 목차 */
+.topnav { position: sticky; top: 0; z-index: 10; margin-inline: -16px; padding-inline: 16px; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.topnav > div { max-width: 1160px; margin-inline: auto; height: var(--nav-h); display: flex; align-items: center; gap: 24px; }
+.topnav b { font-weight: 700; white-space: nowrap; }
+.topnav nav { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.topnav nav::-webkit-scrollbar { display: none; }
+.topnav a { font-size: var(--step--1); color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: var(--radius); white-space: nowrap; transition: color .2s, background-color .2s; }
+.topnav a:hover { color: var(--ink); background: var(--navy-soft); }
+
+/* 머리 */
+.masthead { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 48px; align-items: end; padding-block: 72px 56px; border-bottom: 1px solid var(--line); }
+.masthead .head { display: grid; gap: 20px; }
+.eyebrow { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.04em; color: var(--accent); }
+.masthead h1 { font-size: var(--step-3); font-weight: 700; letter-spacing: -0.025em; line-height: 1.18; }
+.masthead .lead { font-size: var(--step-1); color: var(--muted); max-width: 34em; }
+.profile { margin: 0; display: grid; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 20px; font-size: var(--step-0); }
+.profile div { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); min-width: 0; }
+.profile div:last-child { border-bottom: 0; }
+.profile dt { color: var(--muted); font-size: var(--step--1); padding-top: 2px; }
+.profile dd { margin: 0; font-weight: 600; }
+@media (max-width: 860px) { .masthead { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 40px 36px; } }
+
+/* 섹션 */
+section { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; padding-block: 64px; border-bottom: 1px solid var(--line); scroll-margin-top: var(--nav-h); }
+section > header { display: grid; align-content: start; gap: 8px; position: sticky; top: calc(var(--nav-h) + 24px); align-self: start; }
+section > header h2 { font-size: var(--step-2); font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; }
+section > header p { font-size: var(--step--1); color: var(--muted); }
+.focus > header { border-left: 3px solid var(--accent); padding-left: 14px; }
+.body { display: grid; gap: 24px; min-width: 0; }
+.body > p { max-width: 46em; }
+.body > p.intro { font-size: var(--step-1); }
+.body h3 { font-size: var(--step-0); font-weight: 700; }
+.sub { display: grid; gap: 14px; padding-top: 8px; }
+.sub > h3 { font-size: var(--step-1); font-weight: 700; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.sub > h3 small { font-size: var(--step--1); font-weight: 400; color: var(--muted); margin-left: 8px; }
+@media (max-width: 860px) {
+  section { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-block: 40px; }
+  section > header { position: static; }
+}
+
+/* 수치 */
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stats.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.stat .k { font-size: var(--step--1); color: var(--muted); }
+.stat .v { font-family: var(--font-mono); font-size: 1.75rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--navy); }
+.stat .s { font-size: var(--step--1); color: var(--muted); }
+.stats:not(.four) .stat:first-child { background: var(--navy-soft); border-color: transparent; }
+.stats:not(.four) .stat:last-child { background: var(--accent-soft); border-color: transparent; }
+.stats:not(.four) .stat:last-child .v { color: var(--accent); }
+@media (max-width: 640px) { .stats, .stats.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stat .v { font-size: 1.4rem; } }
+.note { font-size: var(--step--1); color: var(--muted); max-width: 52em; }
+
+/* 기간 */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-left: 2px solid var(--line); }
+.timeline li { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 16px; padding: 10px 0 10px 20px; position: relative; }
+.timeline li::before { content: ""; position: absolute; left: -6px; top: 19px; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--navy); }
+.timeline li:first-child::before { background: var(--accent); border-color: var(--accent); }
+.timeline .d { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); padding-top: 2px; }
+@media (max-width: 640px) { .timeline li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+/* 표 */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: var(--step--1); }
+th, td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 500; background: var(--paper); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.arrow, td.key { white-space: nowrap; font-weight: 600; }
+td.key { font-family: var(--font-mono); font-weight: 500; color: var(--navy); }
+.tag { display: inline-block; font-size: 0.75rem; padding: 1px 8px; border-radius: 4px; white-space: nowrap; font-weight: 500; }
+.tag.done { color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); }
+.tag.wip { color: var(--accent); background: var(--accent-soft); }
+
+/* 2열 */
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 640px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.panel h3, .panel h4 { font-size: var(--step-0); font-weight: 700; }
+.panel ul, .body ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+.panel li::marker, .body li::marker { color: var(--accent); }
+.panel.lead-panel { background: var(--navy-soft); border-color: transparent; }
+.panel.alt-panel { background: var(--accent-soft); border-color: transparent; }
+.panel .meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); padding-top: 8px; border-top: 1px solid var(--line); }
+
+/* 역량 지도 */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+.skill { padding: 14px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 8em minmax(0, 1fr); gap: 14px; min-width: 0; }
+.skill b { font-size: var(--step--1); color: var(--navy); }
+.skill span { font-size: var(--step--1); }
+@media (max-width: 640px) { .skills { grid-template-columns: minmax(0, 1fr); } }
+
+/* 그림 */
+.figure { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; overflow-x: auto; }
+.figure svg { display: block; width: 100%; min-width: 700px; height: auto; }
+.figure svg text { font-family: var(--font-body); fill: var(--ink); }
+.figure svg .t-mute { fill: var(--muted); }
+.figure svg .t-mono { font-family: var(--font-mono); }
+.figure svg .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.figure svg .box-app { fill: var(--navy-soft); stroke: var(--navy); stroke-width: 1.5; }
+.figure svg .box-hot { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.figure svg .wire { stroke: var(--muted); stroke-width: 1.4; fill: none; }
+.figure svg .wire-hot { stroke: var(--accent); stroke-width: 1.6; fill: none; }
+.figure svg .arrowhead { fill: var(--muted); }
+.figure svg .arrowhead-hot { fill: var(--accent); }
+.points { counter-reset: p; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.points li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; grid-template-columns: 1.6em minmax(0, 1fr); gap: 8px; }
+.points li::before { counter-increment: p; content: counter(p); font-family: var(--font-mono); color: var(--accent); font-weight: 600; }
+@media (max-width: 640px) { .points { grid-template-columns: minmax(0, 1fr); } }
+
+/* 파이프라인 */
+.pipeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; counter-reset: s; }
+.pipeline li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.pipeline li::before { counter-increment: s; content: counter(s, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--step--1); font-weight: 600; color: var(--accent); }
+.pipeline b { font-size: var(--step-0); }
+.pipeline span { font-size: var(--step--1); color: var(--muted); }
+
+/* 코드 */
+.code-card { display: grid; gap: 12px; min-width: 0; }
+.code-card + .code-card { padding-top: 24px; border-top: 1px solid var(--line); }
+.code-card h3 { font-size: var(--step-1); font-weight: 700; }
+.code-card .why { font-size: var(--step--1); color: var(--muted); max-width: 52em; }
+.code-card .why b { color: var(--ink); font-weight: 600; }
+.code-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 760px) { .code-pair { grid-template-columns: minmax(0, 1fr); } }
+figure.code { margin: 0; min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--code-bg); overflow: hidden; }
+figure.code figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--code-mute); padding: 8px 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 8px; }
+figure.code pre { margin: 0; padding: 14px; overflow-x: auto; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.65; color: var(--code-ink); }
+pre .c { color: var(--code-mute); }
+pre .k { color: var(--code-key); }
+pre .s { color: var(--code-str); }
+
+/* 화면 */
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 640px) { .shots { grid-template-columns: minmax(0, 1fr); } }
+.shot { margin: 0; display: grid; gap: 8px; min-width: 0; align-content: start; }
+.shot.wide { grid-column: 1 / -1; }
+.shots.phones { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 640px) { .shots.phones { grid-template-columns: minmax(0, 1fr); } }
+.shot img { border: 1px solid var(--line); border-radius: var(--radius); display: block; width: 100%; height: auto; }
+.shot figcaption { font-size: var(--step--1); color: var(--muted); }
+.slot { aspect-ratio: 16 / 9; max-width: 100%; border: 1.5px dashed var(--line); border-radius: var(--radius); background: var(--surface); display: grid; place-content: center; text-align: center; gap: 4px; padding: 12px; }
+.slot b { font-size: var(--step-0); }
+.slot span { font-size: var(--step--1); color: var(--muted); }
+
+footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--muted); display: grid; gap: 4px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media print {
+  :root {
+    --paper: #ffffff; --surface: #ffffff; --ink: #111827; --muted: #4b5563; --line: #d1d5db;
+    --code-bg: #f6f7f9; --code-ink: #111827; --code-mute: #6b7280; --radius: 6px;
+    color-scheme: light;
+  }
+  @page { size: A4; margin: 12mm 12mm 14mm; }
+  body { padding: 0; font-size: 9.6pt; line-height: 1.6; }
+  .topnav { display: none; }
+  .masthead { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; padding-block: 0 16px; }
+  .masthead h1 { font-size: 22pt; }
+  .profile { padding: 2px 12px; font-size: 9pt; }
+  .profile div { padding-block: 6px; }
+  section { grid-template-columns: minmax(0, 1fr); gap: 10px; padding-block: 14px; break-inside: auto; }
+  section > header { position: static; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; break-after: avoid; }
+  section > header h2 { font-size: 13pt; }
+  .body { gap: 12px; }
+  .stat { padding: 10px 12px; }
+  .stat .v { font-size: 15pt; }
+  .panel { padding: 12px 14px; }
+  .stats, .panel, .skill, figure.code, .shot, .pipeline li, .points li, .timeline li, .slot, tr { break-inside: avoid; }
+  .sub > h3, .code-card > h3, .body h3 { break-after: avoid; }
+  .pipeline { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .slot { aspect-ratio: auto; min-height: 90px; }
+  figure.code pre { white-space: pre-wrap; overflow: visible; font-size: 7.4pt; }
+  .figure { overflow: visible; }
+  .figure svg { min-width: 0; }
+  .table-wrap { overflow: visible; }
+}
+.tag.game { color: var(--navy); background: var(--navy-soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topnav"><div><b>경력 기술서</b><nav aria-label="목차"><a href="#summary">요약</a><a href="#career">경력</a><a href="#game">게임 분야</a><a href="#lead">조직 관리</a><a href="#project">현재 프로젝트</a><a href="#skills">기술</a><a href="#edu">학력</a><a href="unity-rpg.html">게임 상세 ↗</a><a href="index.html">WMS 포트폴리오 ↗</a></nav></div></div>
+
+<header class="masthead">
+  <div class="head">
+    <p class="eyebrow">경력 기술서 · 기준일 2026-10-24</p>
+    <h1>게임 서비스 플랫폼 개발과<br>개발 조직 운영 경력</h1>
+    <p class="lead">2003년부터 C# · .NET 으로 일해 온 개발자입니다. 2007~2014년 게임 개발사와 게임 서비스 기업에서 회원 · 인증 · 보안 · 운영 지원 도구 · 채널링 플랫폼을 만들었고, 그 뒤 ERP · 물류 분야에서 개발 팀장과 IT 사업 본부장을 맡았습니다. 지금은 회사 업무와 별도로 온라인 3D RPG 의 클라이언트 · 게임 서버 · 배포 체계를 만들고 있습니다.</p>
+  </div>
+  <dl class="profile">
+    <div><dt>총 경력</dt><dd>23년 (2003-03 ~ 재직 중)</dd></div>
+    <div><dt>게임 분야</dt><dd>6년 7개월 (2007-08 ~ 2014-10)</dd></div>
+    <div><dt>리더 경험</dt><dd>IT 사업 본부장 · 개발실 팀장 · CS 개발팀장</dd></div>
+    <div><dt>주 언어</dt><dd>C# · .NET (23년)</dd></div>
+    <div><dt>연락처</dt><dd>함께 제출한 이력서에 기재</dd></div>
+  </dl>
+</header>
+
+<section id="summary">
+  <header><h2>요약</h2><p>게임 서비스 직무와 관련된 경험 위주</p></header>
+  <div class="body">
+    <div class="stats four">
+      <div class="stat"><span class="k">총 경력</span><span class="v">23년</span><span class="s">2003-03 ~ 재직 중</span></div>
+      <div class="stat"><span class="k">게임 회사 재직</span><span class="v">6년 7개월</span><span class="s">게임 개발사 · 게임 서비스 기업</span></div>
+      <div class="stat"><span class="k">리더 역할</span><span class="v">3회</span><span class="s">본부장 · 개발실 팀장 · CS 개발팀장</span></div>
+      <div class="stat"><span class="k">개인 게임 프로젝트</span><span class="v">504</span><span class="s">커밋 (클라이언트 444 · 서버 60), 2026-10-05 ~</span></div>
+    </div>
+    <ul>
+      <li>게임 포털의 회원 · 고객센터 시스템을 ASP 에서 .NET 으로 다시 만들고, 휴대폰 · 이메일 인증과 MOTP · 지정 PC 보안 서비스를 개발했습니다.</li>
+      <li>게임 운영 지원 플랫폼(봇 검출 · 권한 관리 · 통계 · 로그 연동)과 게임 서비스 플랫폼 · 채널링 서비스, 게임 연동 API, 인증 시스템을 개발했습니다.</li>
+      <li>상장 유통 · 물류 기업에서 IT 사업 본부장으로 AGV · WMS 구축 총괄 PM 과 영업 솔루션 고도화 PM 을 맡았고, 상장 후 ITGC 를 담당했습니다.</li>
+      <li>현재 물류 자동화 기업에서 WCS 아키텍처 설계, 설비 연동, 개발 표준 · 프로세스 수립을 맡고 있습니다.</li>
+      <li>개인 프로젝트로 서버가 판정하는 다중 접속 게임 서버, 확률 공개 API, 경제 지표 일배치, 클라이언트 자동 업데이트를 만들고 봇 1,000명 부하 시험까지 했습니다.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="focus" id="career">
+  <header><h2>경력 사항</h2><p>최근 순, <span class="tag game">게임</span> 표시는 게임 회사 재직</p></header>
+  <div class="body">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>기간</th><th>회사 · 직책</th><th>주요 업무</th></tr></thead>
+        <tbody>
+          <tr><td class="key">2024-01 ~ 재직 중</td><td>물류 자동화 기업<br>물류자동화팀</td><td>WCS 메인 시스템 아키텍처 설계 · 구축(C# · .NET Core), PLC · 바코드 리더 · DAS/DPS 설비 연동, MQTT · REST 기반 WMS 연동, 배포 자동화. 물류센터 3곳 구축. C# 시스템의 Java 전환, 자체 WMS · TMS 설계 · 개발. 제안서 · 기능 명세서 · 인터페이스 정의서 작성, 개발 표준 · 프로세스 수립</td></tr>
+          <tr><td class="key">2019-09 ~ 2023-12</td><td>유통 · 물류 기업(상장사)<br><b>IT 사업 본부 본부장</b></td><td>AGV · WMS 설계 · 구축 총괄 PM, 중국 AGV 업체와 API 협의 · 커스터마이징. 영업 솔루션(CMS) 고도화 PM(개발 2명), MS-SQL 프로시저 튜닝, 장기 · 대용량 업무를 백엔드 워커로 분산. AWS EC2 · S3 기반 구축, 상장 후 ITGC 담당</td></tr>
+          <tr><td class="key">2018-01 ~ 2019-09</td><td>국제 물류 · 배송 기업<br><b>개발실 팀장</b></td><td>싱가포르 배송 · Quick 시스템 개발 · 유지보수, 풀필먼트 솔루션 신규 설계 · 구축, TMS · 배송 영역 담당. 팀원 일정 관리 · 개발 설계</td></tr>
+          <tr><td class="key">2014-11 ~ 2018-01</td><td>ERP 솔루션 기업<br>책임연구원 · <b>CS 개발팀장</b></td><td>ERP 자체 솔루션 고도화(재고 수불 · 시리얼, 회계 마감 · 매출 전표). CS 개발팀장으로 일정 관리 · 선임 연구원 교육 · 긴급 요청 처리</td></tr>
+          <tr><td class="key">2013-08 ~ 2014-10</td><td>게임 서비스 기업 <span class="tag game">게임</span><br>웹서비스팀 과장</td><td>게임 서비스 플랫폼 · 채널링 서비스 개발, 게임 연동 API, 인증 시스템(WCF)</td></tr>
+          <tr><td class="key">2012-01 ~ 2013-08</td><td>게임 개발사 <span class="tag game">게임</span><br>인프라개발실 대리</td><td>게임 운영 지원 플랫폼(봇 검출 · 권한 관리 · 통계 · 로그 연동, WPF), 그룹웨어(전자 결재 · 회의실 예약 · 커뮤니티) 구축</td></tr>
+          <tr><td class="key">2009-04 ~ 2011-06</td><td>게임 개발사 <span class="tag game">게임</span><br>솔루션개발팀 대리</td><td>ASP 기반 회원 · 고객센터 시스템을 .NET 으로 리뉴얼, 휴대폰 · 이메일 인증, MOTP · 지정 PC 보안 서비스, 사내 전자 결재</td></tr>
+          <tr><td class="key">2007-08 ~ 2009-04</td><td>게임 개발사 <span class="tag game">게임</span><br>플랫폼실 대리</td><td>프로젝트 관리 시스템(PMS) 리뉴얼 · 유지보수, 길드 · 메신저 · 쪽지 연동 모듈 개발</td></tr>
+          <tr><td class="key">2006-08 ~ 2007-08</td><td>취업 포털 기업<br>솔루션팀 대리</td><td>대학 취업 전산망 구축 · 고도화(ASP · JSP), 설정값으로 사이트를 적용하는 2.0 플랫폼 신규 구축</td></tr>
+          <tr><td class="key">2005-04 ~ 2006-08</td><td>웹 에이전시<br>유지보수파트 연구원</td><td>고객사 웹사이트 유지보수, 쇼핑몰 · 웹사이트 구축(ASP · MS-SQL)</td></tr>
+          <tr><td class="key">2003-03 ~ 2005-04</td><td>POS 솔루션 기업<br>연구소 연구원</td><td>POS 솔루션(C# WinForm · Win CE, 영수증 · RFID), 매출 관리 시스템, 차량 견적 솔루션</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="focus" id="game">
+  <header><h2>게임 분야 경력</h2><p>2007-08 ~ 2014-10 · 영역별 정리</p></header>
+  <div class="body">
+    <p>게임 클라이언트가 아니라 게임을 서비스하는 쪽, 즉 회원 · 인증 · 보안 · 운영 도구 · 플랫폼 연동을 주로 맡았습니다.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>영역</th><th>한 일</th><th>시기 · 소속</th></tr></thead>
+        <tbody>
+          <tr><td class="key">회원 · 고객센터</td><td>ASP 로 된 회원 · 고객센터 시스템을 .NET 으로 리뉴얼</td><td>2009~2011 · 게임 개발사 솔루션개발팀</td></tr>
+          <tr><td class="key">인증 · 계정 보안</td><td>휴대폰 · 이메일 본인 인증, MOTP(모바일 일회용 비밀번호) · 지정 PC 보안 서비스</td><td>2009~2011 · 게임 개발사 솔루션개발팀</td></tr>
+          <tr><td class="key">인증 시스템</td><td>게임 서비스 플랫폼의 인증 시스템(WCF)</td><td>2013~2014 · 게임 서비스 기업</td></tr>
+          <tr><td class="key">운영 지원</td><td>게임 운영 지원 플랫폼: 봇 검출 · 운영자 권한 관리 · 통계 · 게임 로그 연동(WPF)</td><td>2012~2013 · 게임 개발사 인프라개발실</td></tr>
+          <tr><td class="key">플랫폼 · 채널링</td><td>게임 서비스 플랫폼, 채널링 서비스, 게임 연동 API</td><td>2013~2014 · 게임 서비스 기업</td></tr>
+          <tr><td class="key">커뮤니티 기능</td><td>길드 · 메신저 · 쪽지 연동 모듈</td><td>2007~2009 · 게임 개발사 플랫폼실</td></tr>
+          <tr><td class="key">사내 시스템</td><td>프로젝트 관리 시스템(PMS) 리뉴얼, 그룹웨어(전자 결재 · 회의실 예약 · 커뮤니티)</td><td>2007~2013 · 게임 개발사</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">당시 기술: ASP.NET · .NET Framework 3.5 · ASP.NET MVC 3 · 4 · WCF · WPF · WinForm · MS-SQL.</p>
+  </div>
+</section>
+
+<section class="focus" id="lead">
+  <header><h2>조직 관리 · 리더 경험</h2><p>맡았던 역할과 실제로 한 일</p></header>
+  <div class="body">
+    <div class="cols">
+      <div class="panel lead-panel">
+        <h4>IT 사업 본부장 · 2019-09 ~ 2023-12</h4>
+        <ul>
+          <li>AGV · WMS 설계 · 구축 총괄 PM. 중국 AGV 업체와 API 협의 · 커스터마이징</li>
+          <li>영업 솔루션(CMS) 고도화 PM, 개발 2명</li>
+          <li>AWS EC2 · S3 기반 구축, 장기 · 대용량 업무를 백엔드 워커로 분산</li>
+          <li>회사 상장 후 ITGC(IT 일반 통제) 담당</li>
+          <li>AGV 시스템 구축 공로로 본부장 승진</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>개발실 팀장 · 2018-01 ~ 2019-09</h4>
+        <ul>
+          <li>물류 배송 시스템 개발팀의 팀원 일정 관리와 개발 설계</li>
+          <li>싱가포르 배송 · Quick 시스템, 풀필먼트 솔루션 신규 설계 · 구축</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>CS 개발팀장 · 2014-11 ~ 2018-01</h4>
+        <ul>
+          <li>ERP 고객 지원 개발의 일정 관리</li>
+          <li>선임 연구원 교육</li>
+          <li>긴급 요청 처리와 오류 추적</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h4>현재 · 2024-01 ~</h4>
+        <ul>
+          <li>개발 표준 · 프로세스 수립: 요구사항 관리 · 형상관리 · 배포 · 테스트</li>
+          <li>제안서 · 기능 명세서 · 인터페이스 정의서 작성</li>
+          <li>WCS 아키텍처 설계, 물류센터 3곳 구축</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>일하는 방식</h3>
+      <ul>
+        <li>작업 범위와 순서, 사람이 승인해야 하는 범위를 먼저 정하고 시작합니다.</li>
+        <li>팀 규칙은 문서로만 두지 않고 커밋 훅 · CI 검사로 만들어, 리뷰에서 같은 지적이 반복되지 않게 합니다.</li>
+        <li>요청 · 버그 · 결정이 필요한 사항은 이슈로 남기고, 결정이 나면 같은 변경에서 문서를 고칩니다.</li>
+        <li>운영 반영은 테스트 환경에서 확인한 같은 빌드로 하고, 테스트가 실패하면 배포하지 않습니다.</li>
+        <li>AI 코딩 도구는 맡길 범위와 사람이 승인할 범위를 나누고, 결과물은 사람이 쓴 코드와 같은 검사를 통과해야 반영합니다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="focus" id="project">
+  <header><h2>현재 프로젝트</h2><p>온라인 3D RPG 「일곱 봉인석」 · 2026-10-05 ~ 진행 중 · 개인</p></header>
+  <div class="body">
+    <p>회사 업무와 별도로 진행하는 개인 프로젝트입니다. 게임 디자인 결정 · 개발 체계 설계 · 검수는 제가 하고, 코드 구현은 AI 코딩 에이전트(Claude Code)가 이 체계 안에서 합니다. 클라이언트(Unity 6)와 게임 서버(Rust)를 따로 두고, 테스트계 · 운영계 서버와 공개 배포 저장소까지 운영하고 있습니다.</p>
+    <div class="stats four">
+      <div class="stat"><span class="k">클라이언트 · 서버 커밋</span><span class="v">444 · 60</span><span class="s">클라이언트 작업일 17일</span></div>
+      <div class="stat"><span class="k">GitHub 이슈</span><span class="v">311</span><span class="s">닫힘 303 · 버그 59 · 결정 요청 38</span></div>
+      <div class="stat"><span class="k">자동 테스트</span><span class="v">958 · 132</span><span class="s">클라이언트 NUnit · 서버 Rust</span></div>
+      <div class="stat"><span class="k">코드</span><span class="v">C# 5.8만 · Rust 1.4만</span><span class="s">줄, 테스트 포함</span></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>게임 서비스 관점</th><th>구현한 내용</th></tr></thead>
+        <tbody>
+          <tr><td class="key">서버 판정</td><td>이동 속도 · 공격 거리 · 명중 · 피해 · 몬스터 행동 · 드롭 · 상점 · 거래 · 파티 · 퀘스트를 서버(Rust axum · tokio, WebSocket)가 판정하고 클라이언트는 결과를 그립니다.</td></tr>
+          <tr><td class="key">부하 시험</td><td>봇 1,000명을 사냥터 8곳에 나눴을 때 맵 갱신 평균 29ms · 최대 42ms(예산 100ms), 끊김 0. 봇과 서버를 같은 12코어 머신에서 돌린 결과입니다.</td></tr>
+          <tr><td class="key">확률 공개</td><td>강화 · 드롭 확률을 공개 API(<code>/v1/rates/enchant</code> · <code>/v1/rates/drops/{table}</code>)로 제공합니다.</td></tr>
+          <tr><td class="key">경제 관리</td><td>매일 04:00 일배치가 계정별 스냅샷 · 골드 증감 · 강화 분포를 집계하고 이상 플레이어 6종(골드 급증 · 강화 범위 밖 · 레벨 급증 등)을 기록합니다. 확률표 조정안은 한 번에 ±10%, 처음 값의 ±50% 안에서만 만들고 승인한 것만 반영합니다.</td></tr>
+          <tr><td class="key">운영 도구</td><td>관리 API(공지 · 강제 종료 · 접속자 조회 · 이벤트 · 아이템 지급 · 경제 지표 · 데이터 다시 읽기)는 허용한 주소에서만 엽니다. IP 별 게스트 로그인 · 새 계정 · 동시 접속 수 제한, 캐릭터 이름 · 명패 금칙어를 둡니다.</td></tr>
+          <tr><td class="key">배포 · 업데이트</td><td>서버는 테스트계에서 확인한 같은 바이너리를 운영계로 올립니다. 클라이언트는 공개 배포 저장소의 manifest 서명(RSA 3072)을 확인한 뒤 바뀐 파일만 받고, 장별 콘텐츠는 Addressables 원격 묶음으로 받습니다. 현재 v0.7.2 (macOS · Windows).</td></tr>
+          <tr><td class="key">품질 관리</td><td>컴파일 경고 0, 바뀐 파일의 관련 테스트 통과, 이슈별 테스트 체크리스트와 증거 파일이 있어야 커밋되도록 git 훅으로 막습니다.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">화면 · 아키텍처 · 핵심 코드 · 문제 해결 기록은 <a href="unity-rpg.html">게임 프로젝트 상세 페이지</a>에 있습니다.</p>
+  </div>
+</section>
+
+<section class="focus" id="skills">
+  <header><h2>기술</h2><p>사용 기간과 쓴 곳</p></header>
+  <div class="body">
+    <div class="skills">
+      <div class="skill"><b>C# · .NET</b><span>23년. ASP.NET(MVC · Core) · WCF · WPF · WinForms · EF Core, .NET Framework 1.0 부터 .NET 10 까지</span></div>
+      <div class="skill"><b>게임 클라이언트</b><span>Unity 6 · URP · Addressables · AI Navigation · uGUI, NUnit EditMode 테스트 (2026, 개인 프로젝트)</span></div>
+      <div class="skill"><b>게임 서버</b><span>Rust axum · tokio · sqlx, WebSocket 실시간 필드 서버와 REST API (2026, 개인 프로젝트)</span></div>
+      <div class="skill"><b>그 밖의 백엔드</b><span>Java Spring Boot 3 · 4, Python FastAPI · pandas</span></div>
+      <div class="skill"><b>데이터베이스</b><span>MS-SQL · MariaDB · Oracle 19c · PostgreSQL. 프로시저 튜닝, MariaDB → Oracle 프로시저 129개 변환</span></div>
+      <div class="skill"><b>실시간 · 연동</b><span>WebSocket · MQTT · STOMP, PLC(MC 프로토콜) · 바코드 리더 · 표시기, SAP · 택배사 · 외부 ERP 인터페이스</span></div>
+      <div class="skill"><b>인증 · 보안</b><span>본인 인증 · MOTP · 지정 PC, 토큰 인증, BCrypt · PBKDF2, 요청 수 제한, 관리 API 접근 제한</span></div>
+      <div class="skill"><b>인프라 · 배포</b><span>AWS EC2 · S3, Jenkins · GitHub Actions · systemd, ClickOnce, 테스트계 · 운영계 분리 배포</span></div>
+      <div class="skill"><b>개발 관리</b><span>요구사항 · 형상관리 · 배포 · 테스트 프로세스 수립, ITGC, GitHub 이슈 기반 작업 관리, 제안서 · 명세서 작성</span></div>
+      <div class="skill"><b>AI 개발 체계</b><span>Claude Code 작업 절차 · 훅 · 품질 게이트 설계와 운영 (2026-06 ~)</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="edu">
+  <header><h2>학력 · 자격</h2></header>
+  <div class="body">
+    <ul>
+      <li>한양대학교(안산) 전자컴퓨터공학부 졸업 (2003)</li>
+      <li>정보처리산업기사 · HSK 4급</li>
+      <li>딥러닝 교육과정 6개월 (2023-10 ~ 2024-03)</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>개인 프로젝트 수치는 2026-10-24 저장소 기준입니다. 저장소는 비공개이며, 소스 코드와 게임 플레이는 요청하시면 화면 공유로 보여드립니다.</p>
+  <p><a href="unity-rpg.html">게임 프로젝트 상세</a> · <a href="index.html">WMS 개발 포트폴리오</a></p>
+</footer>
+
+</div>
+</body>
+</html>
