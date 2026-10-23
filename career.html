@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>경력 기술서</title>
-<meta name="description" content="게임 서비스 플랫폼 개발과 개발 조직 운영 경력, 현재 진행 중인 온라인 3D RPG 프로젝트">
+<meta name="description" content="23년 개발 경력 기술서: 게임 서비스 플랫폼, 조직 관리, 물류 시스템, 진행 중인 온라인 3D RPG">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
@@ -251,91 +251,186 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
   .figure svg { min-width: 0; }
   .table-wrap { overflow: visible; }
 }
-.tag.game { color: var(--navy); background: var(--navy-soft); }
+
+/* 경력 기술서 */
+.tag.game { color: var(--accent); background: var(--accent-soft); }
+.stat.hl { background: var(--accent-soft); border-color: transparent; }
+.stat.hl .v { color: var(--accent); }
+tr.hl td { background: color-mix(in srgb, var(--accent-soft) 70%, transparent); }
+.jobs { display: grid; gap: 12px; }
+.job { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 16px; min-width: 0; }
+.job.game { border-left: 4px solid var(--accent); background: color-mix(in srgb, var(--accent-soft) 55%, var(--surface)); }
+.job .when { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); padding-top: 2px; }
+.job.game .when { color: var(--accent); font-weight: 600; }
+.job h3 { font-size: var(--step-0); font-weight: 700; margin-bottom: 8px; }
+.job ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.job li::marker { color: var(--accent); }
+.job .tech { font-size: var(--step--1); color: var(--muted); margin-top: 8px; }
+@media (max-width: 640px) { .job { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+@media print { .job { break-inside: avoid; padding: 10px 12px; } }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<div class="topnav"><div><b>경력 기술서</b><nav aria-label="목차"><a href="#summary">요약</a><a href="#career">경력</a><a href="#game">게임 분야</a><a href="#lead">조직 관리</a><a href="#project">현재 프로젝트</a><a href="#skills">기술</a><a href="#edu">학력</a><a href="unity-rpg.html">게임 상세 ↗</a><a href="index.html">WMS 포트폴리오 ↗</a></nav></div></div>
+<div class="topnav"><div><b>경력 기술서</b><nav aria-label="목차"><a href="#summary">요약</a><a href="#career">경력</a><a href="#game">게임 분야</a><a href="#lead">조직 관리</a><a href="#projects">주요 프로젝트</a><a href="#ai">개발 체계</a><a href="#skills">기술</a><a href="#edu">학력</a><a href="unity-rpg.html">게임 상세 ↗</a><a href="index.html">WMS 상세 ↗</a></nav></div></div>
 
 <header class="masthead">
   <div class="head">
     <p class="eyebrow">경력 기술서 · 기준일 2026-10-24</p>
-    <h1>게임 서비스 플랫폼 개발과<br>개발 조직 운영 경력</h1>
-    <p class="lead">2003년부터 C# · .NET 으로 일해 온 개발자입니다. 2007~2014년 게임 개발사와 게임 서비스 기업에서 회원 · 인증 · 보안 · 운영 지원 도구 · 채널링 플랫폼을 만들었고, 그 뒤 ERP · 물류 분야에서 개발 팀장과 IT 사업 본부장을 맡았습니다. 지금은 회사 업무와 별도로 온라인 3D RPG 의 클라이언트 · 게임 서버 · 배포 체계를 만들고 있습니다.</p>
+    <h1>개발 23년, 게임 서비스 6년 7개월,<br>본부장 · 팀장으로 조직 운영</h1>
+    <p class="lead">2003년부터 C# · .NET 으로 POS · 웹 · 게임 플랫폼 · ERP · 물류 시스템을 개발했습니다. 2007~2014년에는 게임 회사에서 회원 · 인증 · 보안 · 운영 지원 도구 · 채널링 플랫폼을 만들었고, 그 뒤 개발 팀장과 IT 사업 본부장으로 구축 프로젝트와 조직을 맡았습니다. 지금은 물류 자동화 기업에서 WCS 를 설계하면서, 개인 프로젝트로 WMS 플랫폼과 온라인 3D RPG(클라이언트 · 게임 서버)를 만들고 있습니다.</p>
   </div>
   <dl class="profile">
     <div><dt>총 경력</dt><dd>23년 (2003-03 ~ 재직 중)</dd></div>
     <div><dt>게임 분야</dt><dd>6년 7개월 (2007-08 ~ 2014-10)</dd></div>
     <div><dt>리더 경험</dt><dd>IT 사업 본부장 · 개발실 팀장 · CS 개발팀장</dd></div>
-    <div><dt>주 언어</dt><dd>C# · .NET (23년)</dd></div>
+    <div><dt>주 언어</dt><dd>C# · .NET 23년, Java · Rust · Python · TypeScript</dd></div>
     <div><dt>연락처</dt><dd>함께 제출한 이력서에 기재</dd></div>
   </dl>
 </header>
 
 <section id="summary">
-  <header><h2>요약</h2><p>게임 서비스 직무와 관련된 경험 위주</p></header>
+  <header><h2>요약</h2><p>경력 전체, 게임 관련은 주황색 표시</p></header>
   <div class="body">
     <div class="stats four">
       <div class="stat"><span class="k">총 경력</span><span class="v">23년</span><span class="s">2003-03 ~ 재직 중</span></div>
-      <div class="stat"><span class="k">게임 회사 재직</span><span class="v">6년 7개월</span><span class="s">게임 개발사 · 게임 서비스 기업</span></div>
+      <div class="stat hl"><span class="k">게임 회사 재직</span><span class="v">6년 7개월</span><span class="s">게임 개발사 · 게임 서비스 기업</span></div>
       <div class="stat"><span class="k">리더 역할</span><span class="v">3회</span><span class="s">본부장 · 개발실 팀장 · CS 개발팀장</span></div>
-      <div class="stat"><span class="k">개인 게임 프로젝트</span><span class="v">504</span><span class="s">커밋 (클라이언트 444 · 서버 60), 2026-10-05 ~</span></div>
+      <div class="stat hl"><span class="k">현재 게임 프로젝트</span><span class="v">504</span><span class="s">커밋 (클라이언트 444 · 서버 60), 2026-10-05 ~</span></div>
     </div>
-    <ul>
-      <li>게임 포털의 회원 · 고객센터 시스템을 ASP 에서 .NET 으로 다시 만들고, 휴대폰 · 이메일 인증과 MOTP · 지정 PC 보안 서비스를 개발했습니다.</li>
-      <li>게임 운영 지원 플랫폼(봇 검출 · 권한 관리 · 통계 · 로그 연동)과 게임 서비스 플랫폼 · 채널링 서비스, 게임 연동 API, 인증 시스템을 개발했습니다.</li>
-      <li>상장 유통 · 물류 기업에서 IT 사업 본부장으로 AGV · WMS 구축 총괄 PM 과 영업 솔루션 고도화 PM 을 맡았고, 상장 후 ITGC 를 담당했습니다.</li>
-      <li>현재 물류 자동화 기업에서 WCS 아키텍처 설계, 설비 연동, 개발 표준 · 프로세스 수립을 맡고 있습니다.</li>
-      <li>개인 프로젝트로 서버가 판정하는 다중 접속 게임 서버, 확률 공개 API, 경제 지표 일배치, 클라이언트 자동 업데이트를 만들고 봇 1,000명 부하 시험까지 했습니다.</li>
-    </ul>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>시기</th><th>분야</th><th>요약</th></tr></thead>
+        <tbody>
+          <tr><td class="key">2003 ~ 2007</td><td>POS · 웹</td><td>POS 솔루션(C# WinForm · Win CE), 쇼핑몰 · 웹사이트, 대학 취업 전산망</td></tr>
+          <tr class="hl"><td class="key">2007 ~ 2014</td><td><b>게임 서비스</b></td><td>게임 포털 플랫폼, 회원 · 고객센터, 본인 인증 · MOTP · 지정 PC 보안, 게임 운영 지원 도구(봇 검출 · 권한 · 통계 · 로그), 채널링 서비스 · 게임 연동 API · 인증 시스템</td></tr>
+          <tr><td class="key">2014 ~ 2018</td><td>ERP</td><td>재고 · 회계 모듈 고도화, CS 개발팀장</td></tr>
+          <tr><td class="key">2018 ~ 2023</td><td>물류 · 리더</td><td>국제 배송 · 풀필먼트(개발실 팀장), AGV · WMS 구축 총괄(IT 사업 본부장), 상장 후 ITGC</td></tr>
+          <tr><td class="key">2024 ~ 현재</td><td>물류 자동화</td><td>WCS 아키텍처 · 설비 연동 · 개발 표준 수립, 물류센터 3곳 구축</td></tr>
+          <tr class="hl"><td class="key">2026 ~ 개인</td><td><b>WMS · 게임</b></td><td>WMS 플랫폼(Java · Vue), AI 에이전트 개발 체계, <b>온라인 3D RPG(Unity 6 클라이언트 · Rust 게임 서버)</b></td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
 <section class="focus" id="career">
-  <header><h2>경력 사항</h2><p>최근 순, <span class="tag game">게임</span> 표시는 게임 회사 재직</p></header>
+  <header><h2>경력 사항</h2><p>최근 순, <span class="tag game">게임</span> 은 게임 회사 재직</p></header>
   <div class="body">
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>기간</th><th>회사 · 직책</th><th>주요 업무</th></tr></thead>
-        <tbody>
-          <tr><td class="key">2024-01 ~ 재직 중</td><td>물류 자동화 기업<br>물류자동화팀</td><td>WCS 메인 시스템 아키텍처 설계 · 구축(C# · .NET Core), PLC · 바코드 리더 · DAS/DPS 설비 연동, MQTT · REST 기반 WMS 연동, 배포 자동화. 물류센터 3곳 구축. C# 시스템의 Java 전환, 자체 WMS · TMS 설계 · 개발. 제안서 · 기능 명세서 · 인터페이스 정의서 작성, 개발 표준 · 프로세스 수립</td></tr>
-          <tr><td class="key">2019-09 ~ 2023-12</td><td>유통 · 물류 기업(상장사)<br><b>IT 사업 본부 본부장</b></td><td>AGV · WMS 설계 · 구축 총괄 PM, 중국 AGV 업체와 API 협의 · 커스터마이징. 영업 솔루션(CMS) 고도화 PM(개발 2명), MS-SQL 프로시저 튜닝, 장기 · 대용량 업무를 백엔드 워커로 분산. AWS EC2 · S3 기반 구축, 상장 후 ITGC 담당</td></tr>
-          <tr><td class="key">2018-01 ~ 2019-09</td><td>국제 물류 · 배송 기업<br><b>개발실 팀장</b></td><td>싱가포르 배송 · Quick 시스템 개발 · 유지보수, 풀필먼트 솔루션 신규 설계 · 구축, TMS · 배송 영역 담당. 팀원 일정 관리 · 개발 설계</td></tr>
-          <tr><td class="key">2014-11 ~ 2018-01</td><td>ERP 솔루션 기업<br>책임연구원 · <b>CS 개발팀장</b></td><td>ERP 자체 솔루션 고도화(재고 수불 · 시리얼, 회계 마감 · 매출 전표). CS 개발팀장으로 일정 관리 · 선임 연구원 교육 · 긴급 요청 처리</td></tr>
-          <tr><td class="key">2013-08 ~ 2014-10</td><td>게임 서비스 기업 <span class="tag game">게임</span><br>웹서비스팀 과장</td><td>게임 서비스 플랫폼 · 채널링 서비스 개발, 게임 연동 API, 인증 시스템(WCF)</td></tr>
-          <tr><td class="key">2012-01 ~ 2013-08</td><td>게임 개발사 <span class="tag game">게임</span><br>인프라개발실 대리</td><td>게임 운영 지원 플랫폼(봇 검출 · 권한 관리 · 통계 · 로그 연동, WPF), 그룹웨어(전자 결재 · 회의실 예약 · 커뮤니티) 구축</td></tr>
-          <tr><td class="key">2009-04 ~ 2011-06</td><td>게임 개발사 <span class="tag game">게임</span><br>솔루션개발팀 대리</td><td>ASP 기반 회원 · 고객센터 시스템을 .NET 으로 리뉴얼, 휴대폰 · 이메일 인증, MOTP · 지정 PC 보안 서비스, 사내 전자 결재</td></tr>
-          <tr><td class="key">2007-08 ~ 2009-04</td><td>게임 개발사 <span class="tag game">게임</span><br>플랫폼실 대리</td><td>프로젝트 관리 시스템(PMS) 리뉴얼 · 유지보수, 길드 · 메신저 · 쪽지 연동 모듈 개발</td></tr>
-          <tr><td class="key">2006-08 ~ 2007-08</td><td>취업 포털 기업<br>솔루션팀 대리</td><td>대학 취업 전산망 구축 · 고도화(ASP · JSP), 설정값으로 사이트를 적용하는 2.0 플랫폼 신규 구축</td></tr>
-          <tr><td class="key">2005-04 ~ 2006-08</td><td>웹 에이전시<br>유지보수파트 연구원</td><td>고객사 웹사이트 유지보수, 쇼핑몰 · 웹사이트 구축(ASP · MS-SQL)</td></tr>
-          <tr><td class="key">2003-03 ~ 2005-04</td><td>POS 솔루션 기업<br>연구소 연구원</td><td>POS 솔루션(C# WinForm · Win CE, 영수증 · RFID), 매출 관리 시스템, 차량 견적 솔루션</td></tr>
-        </tbody>
-      </table>
+    <div class="jobs">
+      <article class="job">
+        <p class="when">2024-01 ~ 재직 중</p>
+        <div><h3>물류 자동화 기업 · 물류자동화팀</h3>
+        <ul>
+          <li>WCS 메인 시스템 아키텍처 설계 · 구축(C# · ASP.NET Core), 물류센터 3곳 구축</li>
+          <li>PLC(MC 프로토콜) · 고정식 바코드 리더 · DAS/DPS 표시기 연동, MQTT · REST 기반 WMS 연동, 배포 자동화</li>
+          <li>C# 시스템의 Java 전환, 자체 WMS · TMS 설계 · 개발(Spring · Oracle)</li>
+          <li>개발 표준 · 프로세스(요구사항 관리 · 형상관리 · 배포 · 테스트) 수립, 제안서 · 기능 명세서 · 인터페이스 정의서 작성</li>
+        </ul>
+        <p class="tech">WCS 백엔드 C# 395파일 · 80,719줄, REST 컨트롤러 66개 · 엔드포인트 250개 · ASP.NET Core · WinForms · MariaDB · Oracle · Redis · MQTT</p></div>
+      </article>
+      <article class="job">
+        <p class="when">2019-09 ~ 2023-12</p>
+        <div><h3>유통 · 물류 기업(상장사) · IT 사업 본부 <b>본부장</b></h3>
+        <ul>
+          <li>AGV · WMS 설계 · 구축 총괄 PM, 중국 AGV 업체와 API 협의 · 커스터마이징. AGV 시스템 구축 공로로 본부장 승진</li>
+          <li>자체 영업 솔루션(CMS) 고도화 PM(개발 2명), MS-SQL 프로시저 튜닝, 장기 · 대용량 업무를 백엔드 워커로 분산</li>
+          <li>AWS EC2 · S3 기반 구축, 운송장 출력 현장 프로그램과 자동 배포</li>
+          <li>상장 후 ITGC(IT 일반 통제) 담당</li>
+        </ul>
+        <p class="tech">ASP.NET MVC · WinForm · .NET Framework 4.6 · ClickOnce · MS-SQL · AWS</p></div>
+      </article>
+      <article class="job">
+        <p class="when">2018-01 ~ 2019-09</p>
+        <div><h3>국제 물류 · 배송 기업 · 개발실 <b>팀장</b></h3>
+        <ul>
+          <li>싱가포르 배송 · Quick 시스템 개발 · 유지보수, 풀필먼트 솔루션 신규 설계 · 구축, TMS · 배송 영역 담당</li>
+          <li>팀원 일정 관리와 개발 설계</li>
+        </ul>
+        <p class="tech">ASP.NET MVC 4 · .NET Framework 4.6 · MS-SQL</p></div>
+      </article>
+      <article class="job">
+        <p class="when">2014-11 ~ 2018-01</p>
+        <div><h3>ERP 솔루션 기업 · 연구개발팀 책임연구원 · <b>CS 개발팀장</b></h3>
+        <ul>
+          <li>ERP 자체 솔루션 고도화: 재고 수불 · 시리얼, 회계 마감 · 매출 전표</li>
+          <li>CS 개발팀장으로 일정 관리, 선임 연구원 교육, 긴급 요청 처리와 오류 추적</li>
+        </ul>
+        <p class="tech">ASP.NET MVC 4 · .NET Framework 4.6 · MS-SQL</p></div>
+      </article>
+      <article class="job game">
+        <p class="when">2013-08 ~ 2014-10</p>
+        <div><h3>게임 서비스 기업 · 웹서비스팀 과장 <span class="tag game">게임</span></h3>
+        <ul>
+          <li>게임 서비스 플랫폼 · 채널링 서비스 개발</li>
+          <li>게임 연동 API, 인증 시스템(WCF)</li>
+        </ul>
+        <p class="tech">ASP.NET MVC · WCF · MS-SQL</p></div>
+      </article>
+      <article class="job game">
+        <p class="when">2012-01 ~ 2013-08</p>
+        <div><h3>게임 개발사 · 인프라개발실 대리 <span class="tag game">게임</span></h3>
+        <ul>
+          <li>게임 운영 지원 플랫폼: 봇 검출 · 운영자 권한 관리 · 통계 · 게임 로그 연동(WPF)</li>
+          <li>그룹웨어(전자 결재 · 회의실 예약 · 커뮤니티) 구축</li>
+        </ul>
+        <p class="tech">ASP.NET MVC 3 · 4 · WPF · WCF · MS-SQL</p></div>
+      </article>
+      <article class="job game">
+        <p class="when">2009-04 ~ 2011-06</p>
+        <div><h3>게임 개발사 · 솔루션개발팀 대리 <span class="tag game">게임</span></h3>
+        <ul>
+          <li>ASP 기반 회원 · 고객센터 시스템을 .NET 으로 리뉴얼</li>
+          <li>휴대폰 · 이메일 본인 인증, MOTP · 지정 PC 보안 서비스, 사내 전자 결재</li>
+        </ul>
+        <p class="tech">ASP.NET · .NET Framework 3.5 · MS-SQL</p></div>
+      </article>
+      <article class="job game">
+        <p class="when">2007-08 ~ 2009-04</p>
+        <div><h3>게임 개발사 · 플랫폼실 대리 <span class="tag game">게임</span></h3>
+        <ul>
+          <li>길드 · 메신저 · 쪽지 연동 모듈 개발</li>
+          <li>프로젝트 관리 시스템(PMS) 리뉴얼 · 유지보수</li>
+        </ul>
+        <p class="tech">ASP.NET · .NET Framework 3.5 · MS-SQL</p></div>
+      </article>
+      <article class="job">
+        <p class="when">2006-08 ~ 2007-08</p>
+        <div><h3>취업 포털 기업 · 솔루션팀 대리</h3>
+        <ul><li>대학 취업 전산망 구축 · 고도화(ASP · JSP), 설정값으로 사이트를 적용하는 2.0 플랫폼 신규 구축</li></ul></div>
+      </article>
+      <article class="job">
+        <p class="when">2005-04 ~ 2006-08</p>
+        <div><h3>웹 에이전시 · 유지보수파트 연구원</h3>
+        <ul><li>고객사 웹사이트 유지보수, 쇼핑몰 · 웹사이트 구축(ASP · MS-SQL)</li></ul></div>
+      </article>
+      <article class="job">
+        <p class="when">2003-03 ~ 2005-04</p>
+        <div><h3>POS 솔루션 기업 · 연구소 연구원</h3>
+        <ul><li>POS 솔루션(C# WinForm · Win CE, 영수증 출력 · RFID), 매출 관리 시스템, 차량 견적 솔루션</li></ul></div>
+      </article>
     </div>
   </div>
 </section>
 
 <section class="focus" id="game">
-  <header><h2>게임 분야 경력</h2><p>2007-08 ~ 2014-10 · 영역별 정리</p></header>
+  <header><h2>게임 분야 경력</h2><p>2007~2014 회사 경력과 2026 개인 프로젝트</p></header>
   <div class="body">
-    <p>게임 클라이언트가 아니라 게임을 서비스하는 쪽, 즉 회원 · 인증 · 보안 · 운영 도구 · 플랫폼 연동을 주로 맡았습니다.</p>
+    <p>게임 회사에서는 게임을 서비스하는 쪽, 즉 회원 · 인증 · 보안 · 운영 도구 · 플랫폼 연동을 맡았습니다. 지금 만드는 온라인 RPG 에서는 같은 영역을 서버 쪽에서 다시 설계하고 있습니다.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>영역</th><th>한 일</th><th>시기 · 소속</th></tr></thead>
+        <thead><tr><th>영역</th><th>게임 회사에서 한 일 (2007~2014)</th><th>개인 프로젝트에서 만든 것 (2026)</th></tr></thead>
         <tbody>
-          <tr><td class="key">회원 · 고객센터</td><td>ASP 로 된 회원 · 고객센터 시스템을 .NET 으로 리뉴얼</td><td>2009~2011 · 게임 개발사 솔루션개발팀</td></tr>
-          <tr><td class="key">인증 · 계정 보안</td><td>휴대폰 · 이메일 본인 인증, MOTP(모바일 일회용 비밀번호) · 지정 PC 보안 서비스</td><td>2009~2011 · 게임 개발사 솔루션개발팀</td></tr>
-          <tr><td class="key">인증 시스템</td><td>게임 서비스 플랫폼의 인증 시스템(WCF)</td><td>2013~2014 · 게임 서비스 기업</td></tr>
-          <tr><td class="key">운영 지원</td><td>게임 운영 지원 플랫폼: 봇 검출 · 운영자 권한 관리 · 통계 · 게임 로그 연동(WPF)</td><td>2012~2013 · 게임 개발사 인프라개발실</td></tr>
-          <tr><td class="key">플랫폼 · 채널링</td><td>게임 서비스 플랫폼, 채널링 서비스, 게임 연동 API</td><td>2013~2014 · 게임 서비스 기업</td></tr>
-          <tr><td class="key">커뮤니티 기능</td><td>길드 · 메신저 · 쪽지 연동 모듈</td><td>2007~2009 · 게임 개발사 플랫폼실</td></tr>
-          <tr><td class="key">사내 시스템</td><td>프로젝트 관리 시스템(PMS) 리뉴얼, 그룹웨어(전자 결재 · 회의실 예약 · 커뮤니티)</td><td>2007~2013 · 게임 개발사</td></tr>
+          <tr><td class="key">회원 · 인증</td><td>회원 · 고객센터 .NET 리뉴얼, 휴대폰 · 이메일 본인 인증, 게임 서비스 플랫폼 인증 시스템(WCF)</td><td>설치마다 발급하는 손님 토큰(30일), 캐릭터 이름 규칙 · 금칙어</td></tr>
+          <tr><td class="key">계정 보안</td><td>MOTP · 지정 PC 보안 서비스</td><td>IP 마다 로그인 · 새 계정 · 동시 접속 수 제한, 관리 API 는 허용 주소에서만</td></tr>
+          <tr><td class="key">운영 지원</td><td>봇 검출 · 운영자 권한 관리 · 통계 · 게임 로그 연동</td><td>운영 API(공지 · 강제 종료 · 접속자 · 이벤트 · 지급), 매일 경제 지표 집계와 이상 플레이어 6종 기록</td></tr>
+          <tr><td class="key">플랫폼 연동</td><td>채널링 서비스, 게임 연동 API, 길드 · 메신저 · 쪽지 연동 모듈</td><td>REST + WebSocket 게임 서버, 서버가 전투 · 드롭 · 거래 · 파티를 판정</td></tr>
+          <tr><td class="key">서비스 운영</td><td>사내 PMS · 그룹웨어 · 전자 결재</td><td>테스트계 · 운영계 분리 배포, 서명 확인 자동 업데이트, 확률 공개 API, 봇 1,000명 부하 시험</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note">당시 기술: ASP.NET · .NET Framework 3.5 · ASP.NET MVC 3 · 4 · WCF · WPF · WinForm · MS-SQL.</p>
+    <p class="note">개인 프로젝트는 설계 결정 · 개발 체계 · 검수를 제가 하고, 코드 구현은 AI 코딩 에이전트(Claude Code)가 합니다. 화면 · 구조 · 코드는 <a href="unity-rpg.html">게임 프로젝트 상세 페이지</a>에 있습니다.</p>
   </div>
 </section>
 
@@ -346,9 +441,8 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
       <div class="panel lead-panel">
         <h4>IT 사업 본부장 · 2019-09 ~ 2023-12</h4>
         <ul>
-          <li>AGV · WMS 설계 · 구축 총괄 PM. 중국 AGV 업체와 API 협의 · 커스터마이징</li>
+          <li>AGV · WMS 설계 · 구축 총괄 PM, 해외(중국) 설비 업체와 API 협의</li>
           <li>영업 솔루션(CMS) 고도화 PM, 개발 2명</li>
-          <li>AWS EC2 · S3 기반 구축, 장기 · 대용량 업무를 백엔드 워커로 분산</li>
           <li>회사 상장 후 ITGC(IT 일반 통제) 담당</li>
           <li>AGV 시스템 구축 공로로 본부장 승진</li>
         </ul>
@@ -357,23 +451,21 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
         <h4>개발실 팀장 · 2018-01 ~ 2019-09</h4>
         <ul>
           <li>물류 배송 시스템 개발팀의 팀원 일정 관리와 개발 설계</li>
-          <li>싱가포르 배송 · Quick 시스템, 풀필먼트 솔루션 신규 설계 · 구축</li>
+          <li>풀필먼트 솔루션 신규 설계 · 구축</li>
         </ul>
       </div>
       <div class="panel">
         <h4>CS 개발팀장 · 2014-11 ~ 2018-01</h4>
         <ul>
           <li>ERP 고객 지원 개발의 일정 관리</li>
-          <li>선임 연구원 교육</li>
-          <li>긴급 요청 처리와 오류 추적</li>
+          <li>선임 연구원 교육, 긴급 요청 처리와 오류 추적</li>
         </ul>
       </div>
       <div class="panel">
         <h4>현재 · 2024-01 ~</h4>
         <ul>
-          <li>개발 표준 · 프로세스 수립: 요구사항 관리 · 형상관리 · 배포 · 테스트</li>
+          <li>개발 표준 · 프로세스(요구사항 관리 · 형상관리 · 배포 · 테스트) 수립</li>
           <li>제안서 · 기능 명세서 · 인터페이스 정의서 작성</li>
-          <li>WCS 아키텍처 설계, 물류센터 3곳 구축</li>
         </ul>
       </div>
     </div>
@@ -384,37 +476,45 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
         <li>팀 규칙은 문서로만 두지 않고 커밋 훅 · CI 검사로 만들어, 리뷰에서 같은 지적이 반복되지 않게 합니다.</li>
         <li>요청 · 버그 · 결정이 필요한 사항은 이슈로 남기고, 결정이 나면 같은 변경에서 문서를 고칩니다.</li>
         <li>운영 반영은 테스트 환경에서 확인한 같은 빌드로 하고, 테스트가 실패하면 배포하지 않습니다.</li>
-        <li>AI 코딩 도구는 맡길 범위와 사람이 승인할 범위를 나누고, 결과물은 사람이 쓴 코드와 같은 검사를 통과해야 반영합니다.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section class="focus" id="project">
-  <header><h2>현재 프로젝트</h2><p>온라인 3D RPG 「일곱 봉인석」 · 2026-10-05 ~ 진행 중 · 개인</p></header>
+<section class="focus" id="projects">
+  <header><h2>주요 프로젝트</h2><p>2024 ~ 2026, 수치는 저장소 기록</p></header>
   <div class="body">
-    <p>회사 업무와 별도로 진행하는 개인 프로젝트입니다. 게임 디자인 결정 · 개발 체계 설계 · 검수는 제가 하고, 코드 구현은 AI 코딩 에이전트(Claude Code)가 이 체계 안에서 합니다. 클라이언트(Unity 6)와 게임 서버(Rust)를 따로 두고, 테스트계 · 운영계 서버와 공개 배포 저장소까지 운영하고 있습니다.</p>
-    <div class="stats four">
-      <div class="stat"><span class="k">클라이언트 · 서버 커밋</span><span class="v">444 · 60</span><span class="s">클라이언트 작업일 17일</span></div>
-      <div class="stat"><span class="k">GitHub 이슈</span><span class="v">311</span><span class="s">닫힘 303 · 버그 59 · 결정 요청 38</span></div>
-      <div class="stat"><span class="k">자동 테스트</span><span class="v">958 · 132</span><span class="s">클라이언트 NUnit · 서버 Rust</span></div>
-      <div class="stat"><span class="k">코드</span><span class="v">C# 5.8만 · Rust 1.4만</span><span class="s">줄, 테스트 포함</span></div>
-    </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>게임 서비스 관점</th><th>구현한 내용</th></tr></thead>
+        <thead><tr><th>프로젝트</th><th>기간 · 구분</th><th>기술</th><th>규모 · 결과</th></tr></thead>
         <tbody>
-          <tr><td class="key">서버 판정</td><td>이동 속도 · 공격 거리 · 명중 · 피해 · 몬스터 행동 · 드롭 · 상점 · 거래 · 파티 · 퀘스트를 서버(Rust axum · tokio, WebSocket)가 판정하고 클라이언트는 결과를 그립니다.</td></tr>
-          <tr><td class="key">부하 시험</td><td>봇 1,000명을 사냥터 8곳에 나눴을 때 맵 갱신 평균 29ms · 최대 42ms(예산 100ms), 끊김 0. 봇과 서버를 같은 12코어 머신에서 돌린 결과입니다.</td></tr>
-          <tr><td class="key">확률 공개</td><td>강화 · 드롭 확률을 공개 API(<code>/v1/rates/enchant</code> · <code>/v1/rates/drops/{table}</code>)로 제공합니다.</td></tr>
-          <tr><td class="key">경제 관리</td><td>매일 04:00 일배치가 계정별 스냅샷 · 골드 증감 · 강화 분포를 집계하고 이상 플레이어 6종(골드 급증 · 강화 범위 밖 · 레벨 급증 등)을 기록합니다. 확률표 조정안은 한 번에 ±10%, 처음 값의 ±50% 안에서만 만들고 승인한 것만 반영합니다.</td></tr>
-          <tr><td class="key">운영 도구</td><td>관리 API(공지 · 강제 종료 · 접속자 조회 · 이벤트 · 아이템 지급 · 경제 지표 · 데이터 다시 읽기)는 허용한 주소에서만 엽니다. IP 별 게스트 로그인 · 새 계정 · 동시 접속 수 제한, 캐릭터 이름 · 명패 금칙어를 둡니다.</td></tr>
-          <tr><td class="key">배포 · 업데이트</td><td>서버는 테스트계에서 확인한 같은 바이너리를 운영계로 올립니다. 클라이언트는 공개 배포 저장소의 manifest 서명(RSA 3072)을 확인한 뒤 바뀐 파일만 받고, 장별 콘텐츠는 Addressables 원격 묶음으로 받습니다. 현재 v0.7.2 (macOS · Windows).</td></tr>
-          <tr><td class="key">품질 관리</td><td>컴파일 경고 0, 바뀐 파일의 관련 테스트 통과, 이슈별 테스트 체크리스트와 증거 파일이 있어야 커밋되도록 git 훅으로 막습니다.</td></tr>
+          <tr class="hl"><td class="key">온라인 3D RPG<br>「일곱 봉인석」</td><td>2026-10 ~ 진행 중 · 개인</td><td>Unity 6 · URP · C#, Rust axum · tokio · sqlx, WebSocket</td><td>커밋 444 · 60, 이슈 311, 테스트 958 · 132. 서버 판정, 봇 1,000명 부하 시험(맵 갱신 평균 29ms), 확률 공개 API, 경제 일배치, v0.7.2 배포(macOS · Windows)</td></tr>
+          <tr><td class="key">WCS 백엔드</td><td>2024-01 ~ · 재직 중 업무</td><td>ASP.NET Core · MariaDB · Oracle · Redis · MQTT</td><td>C# 80,719줄, 엔드포인트 250개, PLC · 바코드 리더 · 표시기 연동, 물류센터 3곳</td></tr>
+          <tr><td class="key">WMS 플랫폼 본체</td><td>2026-06 ~ 09 · 개인</td><td>Spring Boot 4 · Java 25 · Vue 3 · MyBatis</td><td>Java 149,810줄 · Vue/TS 203,470줄, 테스트 4,361, PR 1,819. MariaDB · Oracle · PostgreSQL 다중 DB</td></tr>
+          <tr><td class="key">레거시 이관 WMS</td><td>2026-09 ~ 10 · 개인</td><td>Spring Boot 3 · JSP · Oracle 19c</td><td>프로시저 129개 MariaDB → Oracle 변환, PR 220. 부하 시험으로 fetch size 문제를 찾아 처리량 초당 425 → 1,351건</td></tr>
+          <tr><td class="key">연동 미들웨어 · 분석</td><td>2026-08 ~ 09 · 개인</td><td>Spring Boot 4, Python FastAPI · scikit-learn</td><td>SAP ECC · 택배사 · 기준정보 13종 연동, ABC 분석 · 28일 수요예측</td></tr>
+          <tr><td class="key">그 외</td><td>2026 · 개인</td><td>.NET 10 · Vue 3, Unity 6, OpenSearch</td><td>가계부(카드 문자 · 영수증 OCR), 물류센터 디지털 트윈, 특허 검색(138,348건 색인)</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note">화면 · 아키텍처 · 핵심 코드 · 문제 해결 기록은 <a href="unity-rpg.html">게임 프로젝트 상세 페이지</a>에 있습니다.</p>
+    <p class="note">WMS 쪽 상세(아키텍처 · 코드 · 화면 · CI/CD)는 <a href="index.html">WMS 개발 포트폴리오</a>에 있습니다.</p>
+  </div>
+</section>
+
+<section class="focus" id="ai">
+  <header><h2>개발 체계</h2><p>AI 코딩 에이전트를 절차 · 검사 안에서 운용, 2026-06 ~</p></header>
+  <div class="body">
+    <div class="stats four">
+      <div class="stat"><span class="k">WMS 저장소 9개 커밋</span><span class="v">6,002</span><span class="s">2026-06-16 ~ 10-05</span></div>
+      <div class="stat"><span class="k">AI 공동작성 커밋</span><span class="v">2,403</span><span class="s">저장소 9개 4,018건 중 (머지 제외)</span></div>
+      <div class="stat"><span class="k">자동 테스트</span><span class="v">6,426</span><span class="s">WMS 저장소 9개 합</span></div>
+      <div class="stat hl"><span class="k">게임 저장소 커밋</span><span class="v">504</span><span class="s">AI 공동작성 503 · 2026-10-05 ~</span></div>
+    </div>
+    <ul>
+      <li>무엇을 할지와 되돌릴 수 없는 결정은 사람이 하고, 에이전트는 정해진 절차로 실행합니다. 계획 · 승인 · 테스트 · 리뷰 · 배포 단계를 훅과 게이트 스크립트로 막아 두어 건너뛸 수 없게 했습니다.</li>
+      <li>에이전트가 쓴 코드도 사람이 쓴 코드와 같은 테스트 · 리뷰 · CI 를 통과해야 main 에 들어갑니다.</li>
+      <li>에이전트가 확인 없이 말한 진술과 규칙 위반을 이슈로 쌓아(195건) 반복 여부를 재고, 그 결과로 검사 방식을 바꿨습니다.</li>
+    </ul>
   </div>
 </section>
 
@@ -423,15 +523,15 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
   <div class="body">
     <div class="skills">
       <div class="skill"><b>C# · .NET</b><span>23년. ASP.NET(MVC · Core) · WCF · WPF · WinForms · EF Core, .NET Framework 1.0 부터 .NET 10 까지</span></div>
-      <div class="skill"><b>게임 클라이언트</b><span>Unity 6 · URP · Addressables · AI Navigation · uGUI, NUnit EditMode 테스트 (2026, 개인 프로젝트)</span></div>
-      <div class="skill"><b>게임 서버</b><span>Rust axum · tokio · sqlx, WebSocket 실시간 필드 서버와 REST API (2026, 개인 프로젝트)</span></div>
-      <div class="skill"><b>그 밖의 백엔드</b><span>Java Spring Boot 3 · 4, Python FastAPI · pandas</span></div>
-      <div class="skill"><b>데이터베이스</b><span>MS-SQL · MariaDB · Oracle 19c · PostgreSQL. 프로시저 튜닝, MariaDB → Oracle 프로시저 129개 변환</span></div>
-      <div class="skill"><b>실시간 · 연동</b><span>WebSocket · MQTT · STOMP, PLC(MC 프로토콜) · 바코드 리더 · 표시기, SAP · 택배사 · 외부 ERP 인터페이스</span></div>
-      <div class="skill"><b>인증 · 보안</b><span>본인 인증 · MOTP · 지정 PC, 토큰 인증, BCrypt · PBKDF2, 요청 수 제한, 관리 API 접근 제한</span></div>
-      <div class="skill"><b>인프라 · 배포</b><span>AWS EC2 · S3, Jenkins · GitHub Actions · systemd, ClickOnce, 테스트계 · 운영계 분리 배포</span></div>
-      <div class="skill"><b>개발 관리</b><span>요구사항 · 형상관리 · 배포 · 테스트 프로세스 수립, ITGC, GitHub 이슈 기반 작업 관리, 제안서 · 명세서 작성</span></div>
-      <div class="skill"><b>AI 개발 체계</b><span>Claude Code 작업 절차 · 훅 · 품질 게이트 설계와 운영 (2026-06 ~)</span></div>
+      <div class="skill"><b>게임</b><span>게임 포털 · 회원 · 인증 · 운영 도구(2007~2014), Unity 6 · URP · Addressables, Rust 게임 서버(2026)</span></div>
+      <div class="skill"><b>Java</b><span>Spring Boot 3 · 4, MyBatis, JSP. 개인 프로젝트 Java 약 22만 줄</span></div>
+      <div class="skill"><b>그 밖의 언어</b><span>Rust(axum · tokio · sqlx), Python(FastAPI · pandas · scikit-learn), TypeScript · Vue 3</span></div>
+      <div class="skill"><b>데이터베이스</b><span>MS-SQL · MariaDB · Oracle 19c · PostgreSQL, 프로시저 튜닝 · 변환, Redis</span></div>
+      <div class="skill"><b>실시간 · 연동</b><span>WebSocket · MQTT · STOMP, PLC · 바코드 리더 · 표시기, SAP · 택배사 · 외부 ERP</span></div>
+      <div class="skill"><b>인증 · 보안</b><span>본인 인증 · MOTP · 지정 PC, 토큰 인증, BCrypt · PBKDF2, 요청 수 제한, ITGC</span></div>
+      <div class="skill"><b>인프라 · 배포</b><span>AWS EC2 · S3, Jenkins · GitHub Actions · systemd, Docker, ClickOnce</span></div>
+      <div class="skill"><b>개발 관리</b><span>요구사항 · 형상관리 · 배포 · 테스트 프로세스 수립, 이슈 기반 작업 관리, 제안서 · 명세서 작성</span></div>
+      <div class="skill"><b>AI 개발 체계</b><span>Claude Code 작업 절차 · 훅 · 품질 게이트, 자체 MCP 서버 6개 · 플러그인 2개</span></div>
     </div>
   </div>
 </section>
@@ -448,7 +548,7 @@ footer.foot { padding-block: 32px 0; font-size: var(--step--1); color: var(--mut
 </section>
 
 <footer class="foot">
-  <p>개인 프로젝트 수치는 2026-10-24 저장소 기준입니다. 저장소는 비공개이며, 소스 코드와 게임 플레이는 요청하시면 화면 공유로 보여드립니다.</p>
+  <p>개인 프로젝트 수치는 WMS 저장소 2026-10-01 ~ 10-05, 게임 저장소 2026-10-24 기준입니다. 저장소는 비공개이며, 소스 코드와 게임 플레이는 요청하시면 화면 공유로 보여드립니다.</p>
   <p><a href="unity-rpg.html">게임 프로젝트 상세</a> · <a href="index.html">WMS 개발 포트폴리오</a></p>
 </footer>
 
